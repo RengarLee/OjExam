@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OjExam.EFDAL
 {
-    public class ClassDal : BaseDal<Class>, IClassDal
+    public partial class ClassDal : BaseDal<Class>, IClassDal
     {
     }
 }

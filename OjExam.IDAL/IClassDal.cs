@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OjExam.IDAL
 {
-    public interface IClassDal : IBaseDal<Class>
+    public partial interface IClassDal : IBaseDal<Class>
     {
 
     }
