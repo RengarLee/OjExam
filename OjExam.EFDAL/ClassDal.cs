@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OjExam.IDAL;
+using OjExam.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OjExam.EFDAL
 {
-    public class Class1
+    public class ClassDal : BaseDal<Class>, IClassDal
     {
     }
 }

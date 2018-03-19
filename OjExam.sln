@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OjExam.EFDAL", "OjExam.EFDA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OjExam.IDAL", "OjExam.IDAL\OjExam.IDAL.csproj", "{819A81D6-AD24-460B-B850-F5C03A1D4AED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OjExam.DALFactory", "OjExam.DALFactory\OjExam.DALFactory.csproj", "{F81F8387-DA12-40DB-A503-668CB761A7BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{3A2B589F-2B53-4EBD-8E50-CD00A278C079}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +31,17 @@ Global
 		{819A81D6-AD24-460B-B850-F5C03A1D4AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{819A81D6-AD24-460B-B850-F5C03A1D4AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{819A81D6-AD24-460B-B850-F5C03A1D4AED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F81F8387-DA12-40DB-A503-668CB761A7BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F81F8387-DA12-40DB-A503-668CB761A7BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F81F8387-DA12-40DB-A503-668CB761A7BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F81F8387-DA12-40DB-A503-668CB761A7BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6B8CE7CC-B27F-40A6-A670-DFCB568B2B31} = {3A2B589F-2B53-4EBD-8E50-CD00A278C079}
+		{819A81D6-AD24-460B-B850-F5C03A1D4AED} = {3A2B589F-2B53-4EBD-8E50-CD00A278C079}
+		{F81F8387-DA12-40DB-A503-668CB761A7BF} = {3A2B589F-2B53-4EBD-8E50-CD00A278C079}
 	EndGlobalSection
 EndGlobal
