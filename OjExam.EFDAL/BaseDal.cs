@@ -28,7 +28,7 @@ namespace OjExam.EFDAL
         public bool Add(T entity)
         {
             db.Set<T>().Add(entity);
-            return strue;
+            return true;
         }
 
         public bool Delete(T entity)

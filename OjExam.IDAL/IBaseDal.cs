@@ -16,11 +16,11 @@ namespace OjExam.IDAL
         #endregion
 
         #region Add Delete Updata
-        int Add(T entity);
+        bool Add(T entity);
 
-        int Delete(T entity);
+        bool Delete(T entity);
 
-        int Updata(T entity);
+        bool Updata(T entity);
 
         #endregion
     }
