@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OjExam.Model", "OjExam.Model\OjExam.Model.csproj", "{C8A987B1-640D-48BE-90D9-2B2FFDC8DA49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OjExam.EFDAL", "OjExam.EFDAL\OjExam.EFDAL.csproj", "{6B8CE7CC-B27F-40A6-A670-DFCB568B2B31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OjExam.IDAL", "OjExam.IDAL\OjExam.IDAL.csproj", "{819A81D6-AD24-460B-B850-F5C03A1D4AED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8A987B1-640D-48BE-90D9-2B2FFDC8DA49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8A987B1-640D-48BE-90D9-2B2FFDC8DA49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8A987B1-640D-48BE-90D9-2B2FFDC8DA49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8A987B1-640D-48BE-90D9-2B2FFDC8DA49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B8CE7CC-B27F-40A6-A670-DFCB568B2B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B8CE7CC-B27F-40A6-A670-DFCB568B2B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B8CE7CC-B27F-40A6-A670-DFCB568B2B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B8CE7CC-B27F-40A6-A670-DFCB568B2B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{819A81D6-AD24-460B-B850-F5C03A1D4AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819A81D6-AD24-460B-B850-F5C03A1D4AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819A81D6-AD24-460B-B850-F5C03A1D4AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819A81D6-AD24-460B-B850-F5C03A1D4AED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
