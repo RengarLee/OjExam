@@ -47,6 +47,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IDals.tt</DependentUpon>
     </Compile>
+    <Compile Include="IDbSession.cs" />
+    <Compile Include="IDbSesssion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IDbSesssion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +65,10 @@
     <Content Include="IDals.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IDals.cs</LastGenOutput>
+    </Content>
+    <Content Include="IDbSesssion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IDbSesssion.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

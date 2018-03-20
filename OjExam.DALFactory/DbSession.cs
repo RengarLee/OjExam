@@ -1,4 +1,5 @@
-﻿using OjExam.Model;
+﻿using OjExam.IDAL;
+using OjExam.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,16 +10,13 @@ using System.Threading.Tasks;
 
 namespace OjExam.DALFactory
 {
-    public class DbSession
+    public partial class DbSession:IDbSession
     {
-        public static DbContext db
-        {
-            get {return DbSessionFactory.GetCurrentSession(); }
-        }
         
-        public static int SaveChanges()
+
+        public int SaveChanges()
         {
-            return db.SaveChanges();
+            return DbSessionFactory.GetCurrentSession().SaveChanges();
         }
     }
 }

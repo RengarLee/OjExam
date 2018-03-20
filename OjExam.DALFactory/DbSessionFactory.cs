@@ -1,4 +1,5 @@
-﻿using OjExam.Model;
+﻿using OjExam.IDAL;
+using OjExam.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,12 +12,13 @@ namespace OjExam.DALFactory
 {
     class DbSessionFactory
     {
-        public static DbContext GetCurrentSession()
+        //DbSession线程内唯一
+        public static IDbSession GetCurrentSession()
         {
-            DbContext db = CallContext.GetData("DbSession") as DbContext;
+            IDbSession db = CallContext.GetData("DbSession") as IDbSession;
             if (db == null)
             {
-                db = new OjExamEntities();
+                db = new DbSession();
                 CallContext.SetData("DbSession", db);
             }
 

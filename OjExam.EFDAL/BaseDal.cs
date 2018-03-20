@@ -1,6 +1,7 @@
 ﻿using OjExam.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -10,36 +11,41 @@ namespace OjExam.EFDAL
 {
     public class BaseDal<T> where T : class, new()
     {
-        OjExamEntities db = new OjExamEntities();
+        //线程内唯一
+        public DbContext Db
+        {
+            get { return DbContextFactory.GetCurrentDbContext(); }
+        }
+        
         #region Qurry
         public T GetEntities(Expression<Func<T, bool>> whereLamdba)
         {
-            //return db.Entry.GetEntities(whereLamdba);
-            return db.Set<T>().Where<T>(whereLamdba).FirstOrDefault();
+            //return Db.Entry.GetEntities(whereLamdba);
+            return Db.Set<T>().Where<T>(whereLamdba).FirstOrDefault();
         }
 
         public IQueryable<T> GetPageEntities<S>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLamdba, Expression<Func<T, S>> orderByLamdba, bool isAsc)
         {
-            return db.Set<T>().Where<T>(whereLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).OrderBy<T, S>(orderByLamdba) as IQueryable<T>;
+            return Db.Set<T>().Where<T>(whereLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).OrderBy<T, S>(orderByLamdba) as IQueryable<T>;
         }
         #endregion
 
         #region Add Delete Updata
         public bool Add(T entity)
         {
-            db.Set<T>().Add(entity);
+            Db.Set<T>().Add(entity);
             return true;
         }
 
         public bool Delete(T entity)
         {
-            db.Entry<T>(entity).State = System.Data.Entity.EntityState.Deleted;
+            Db.Entry<T>(entity).State = System.Data.Entity.EntityState.Deleted;
             return true;
         }
 
         public bool Updata(T entity)
         {
-            db.Entry<T>(entity).State = System.Data.Entity.EntityState.Modified;
+            Db.Entry<T>(entity).State = System.Data.Entity.EntityState.Modified;
             return true;
         }
         #endregion

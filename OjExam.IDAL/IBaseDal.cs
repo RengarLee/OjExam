@@ -9,6 +9,7 @@ namespace OjExam.IDAL
 {
     public interface IBaseDal<T> where T : class, new()
     {
+
         #region Qurry
         T GetEntities(Expression<Func<T, bool>> whereLamdba);
 
