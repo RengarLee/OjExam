@@ -18,15 +18,21 @@ namespace OjExam.EFDAL
         }
         
         #region Qurry
-        public T GetEntities(Expression<Func<T, bool>> whereLamdba)
+        public IQueryable<T> GetEntities(Expression<Func<T, bool>> whereLamdba)
         {
             //return Db.Entry.GetEntities(whereLamdba);
-            return Db.Set<T>().Where<T>(whereLamdba).FirstOrDefault();
+            return Db.Set<T>().Where<T>(whereLamdba).AsQueryable();
         }
 
-        public IQueryable<T> GetPageEntities<S>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLamdba, Expression<Func<T, S>> orderByLamdba, bool isAsc)
+        public IQueryable<T> GetPageEntities<S>(int pageIndex, int pageSize, out int total, Expression<Func<T, bool>> whereLamdba, Expression<Func<T, S>> orderByLamdba, bool isAsc)
         {
-            return Db.Set<T>().Where<T>(whereLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).OrderBy<T, S>(orderByLamdba) as IQueryable<T>;
+            total = Db.Set<T>().Count();
+            if (isAsc) {
+                return Db.Set<T>().Where<T>(whereLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).OrderBy<T, S>(orderByLamdba).AsQueryable();
+            } else
+            {
+                return Db.Set<T>().Where<T>(whereLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).OrderByDescending<T, S>(orderByLamdba).AsQueryable();
+            }
         }
         #endregion
 

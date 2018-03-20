@@ -1,4 +1,5 @@
 ﻿using OjExam.DALFactory;
+using OjExam.IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,42 +9,53 @@ using System.Threading.Tasks;
 
 namespace OjExam.BLL
 {
-    public class BaseService<T> where T:class, new ()
+    public abstract class BaseService<T> where T : class, new()
     {
-    //    public DbSession 
+        public IBaseDal<T> CurrentDal { get; set; }
 
-    //    #region Qurry
-    //    public T GetEntities(Expression<Func<T, bool>> whereLamdba)
-    //    {
-    //        //return db.Entry.GetEntities(whereLamdba);
-    //        return db.Set<T>().Where<T>(whereLamdba).FirstOrDefault();
-    //    }
+        public IDbSession DbSession
+        {
+            get { return DbSessionFactory.GetCurrentSession(); }
+        }
 
-    //    public IQueryable<T> GetPageEntities<S>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLamdba, Expression<Func<T, S>> orderByLamdba, bool isAsc)
-    //    {
-    //        return db.Set<T>().Where<T>(whereLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).OrderBy<T, S>(orderByLamdba) as IQueryable<T>;
-    //    }
-    //    #endregion
+        public abstract void SetCurrentDal();
 
-    //    #region Add Delete Updata
-    //    public bool Add(T entity)
-    //    {
-    //        db.Set<T>().Add(entity);
-    //        return true;
-    //    }
+        public BaseService()
+        {
+            SetCurrentDal();
+        }
 
-    //    public bool Delete(T entity)
-    //    {
-    //        db.Entry<T>(entity).State = System.Data.Entity.EntityState.Deleted;
-    //        return true;
-    //    }
+        #region Qurry
+        public IQueryable<T> GetEntities(Expression<Func<T, bool>> whereLamdba)
+        {
+            return CurrentDal.GetEntities(whereLamdba);
+        }
 
-    //    public bool Updata(T entity)
-    //    {
-    //        db.Entry<T>(entity).State = System.Data.Entity.EntityState.Modified;
-    //        return true;
-    //    }
-    //    #endregion
-    //}
-}
+        public IQueryable<T> GetPageEntities<S>(int pageIndex, int pageSize, out int total, Expression<Func<T, bool>> whereLamdba, Expression<Func<T, S>> orderByLamdba, bool isAsc)
+        {
+            return CurrentDal.GetPageEntities<S>(pageIndex, pageSize, out total, whereLamdba, orderByLamdba, isAsc);
+        }
+        #endregion
+
+        #region Add Delete Updata
+        public bool Add(T entity)
+        {
+            CurrentDal.Add(entity);
+            return DbSession.SaveChanges()>0;
+        }
+
+        public bool Delete(T entity)
+        {
+            CurrentDal.Delete(entity);
+            return DbSession.SaveChanges() > 0;
+        }
+
+        public bool Updata(T entity)
+        {
+            CurrentDal.Updata(entity);
+            return DbSession.SaveChanges() > 0;
+        }
+        #endregion
+    }
+
 }

@@ -59,4 +59,5 @@ namespace OjExam.DALFactory
 			get { return StaticDalFactory.GetTeacherDal(); }
 		}
 	}
+
 }

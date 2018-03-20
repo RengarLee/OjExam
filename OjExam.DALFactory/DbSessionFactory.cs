@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OjExam.DALFactory
 {
-    class DbSessionFactory
+    public class DbSessionFactory
     {
         //DbSession线程内唯一
         public static IDbSession GetCurrentSession()

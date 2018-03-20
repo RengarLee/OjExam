@@ -5,15 +5,15 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OjExam.IDAL
+namespace OjExam.IBLL
 {
-    public interface IBaseDal<T> where T : class, new()
+    public interface IBaseService<T> where T:class, new ()
     {
-
         #region Qurry
         IQueryable<T> GetEntities(Expression<Func<T, bool>> whereLamdba);
 
         IQueryable<T> GetPageEntities<S>(int pageIndex, int pageSize, out int total, Expression<Func<T, bool>> whereLamdba, Expression<Func<T, S>> orderByLamdba, bool isAsc);
+
         #endregion
 
         #region Add Delete Updata

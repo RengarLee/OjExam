@@ -43,12 +43,38 @@
     <Compile Include="BaseService.cs" />
     <Compile Include="ClassService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OjExam.DALFactory\OjExam.DALFactory.csproj">
       <Project>{F81F8387-DA12-40DB-A503-668CB761A7BF}</Project>
       <Name>OjExam.DALFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OjExam.IBLL\OjExam.IBLL.csproj">
+      <Project>{BB036A88-5E18-4AB5-A4FF-5F04E36D342A}</Project>
+      <Name>OjExam.IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OjExam.IDAL\OjExam.IDAL.csproj">
+      <Project>{819A81D6-AD24-460B-B850-F5C03A1D4AED}</Project>
+      <Name>OjExam.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OjExam.Model\OjExam.Model.csproj">
+      <Project>{C8A987B1-640D-48BE-90D9-2B2FFDC8DA49}</Project>
+      <Name>OjExam.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Services.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Services.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
