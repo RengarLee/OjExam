@@ -12,11 +12,12 @@ namespace OjExam.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AdminSet
+    public partial class Admin
     {
         public int Id { get; set; }
-        public string Loginname { get; set; }
-        public string Password { get; set; }
+        public string LName { get; set; }
+        public string Pwd { get; set; }
         public string Status { get; set; }
+        public short DelFlag { get; set; }
     }
 }

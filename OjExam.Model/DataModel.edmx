@@ -4,290 +4,300 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OjExamModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AdminSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Loginname" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Class">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ClassTeacherCourser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TeacherId" Type="int" Nullable="false" />
-          <Property Name="ClassId" Type="int" Nullable="false" />
-          <Property Name="CourserId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Courser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ExamSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CTCId" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="StartTime" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="EndTime" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Rank" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ClassTeacherCourser_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Grade">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Score" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="ExamId" Type="int" Nullable="false" />
-          <Property Name="Problems" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Answers" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="KnowPointSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CourserId" Type="int" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Problem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Src" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="KnowPointId" Type="int" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Rank" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="StatusSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StuId" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IDcard" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ClassId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Teacher">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TeaId" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IDcard" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_ClassStudent">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Class">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="ClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassTeacherCourserClass">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
-          <End Role="ClassTeacherCourser" Type="Self.ClassTeacherCourser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Class">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClassTeacherCourser">
-              <PropertyRef Name="ClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassTeacherCourserCourser">
-          <End Role="Courser" Type="Self.Courser" Multiplicity="1" />
-          <End Role="ClassTeacherCourser" Type="Self.ClassTeacherCourser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClassTeacherCourser">
-              <PropertyRef Name="CourserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClassTeacherCourserTeacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-          <End Role="ClassTeacherCourser" Type="Self.ClassTeacherCourser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Teacher">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClassTeacherCourser">
-              <PropertyRef Name="TeacherId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CourserKnowPoint">
-          <End Role="Courser" Type="Self.Courser" Multiplicity="1" />
-          <End Role="KnowPointSet" Type="Self.KnowPointSet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KnowPointSet">
-              <PropertyRef Name="CourserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExamClassTeacherCourser">
-          <End Role="ClassTeacherCourser" Type="Self.ClassTeacherCourser" Multiplicity="1" />
-          <End Role="ExamSet" Type="Self.ExamSet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassTeacherCourser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ExamSet">
-              <PropertyRef Name="ClassTeacherCourser_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GradeExam">
-          <End Role="ExamSet" Type="Self.ExamSet" Multiplicity="1" />
-          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ExamSet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Grade">
-              <PropertyRef Name="ExamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GradeStudent">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Grade">
-              <PropertyRef Name="StudentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_KnowPointProblem">
-          <End Role="KnowPointSet" Type="Self.KnowPointSet" Multiplicity="1" />
-          <End Role="Problem" Type="Self.Problem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KnowPointSet">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Problem">
-              <PropertyRef Name="KnowPointId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="OjExamModelStoreContainer">
-          <EntitySet Name="AdminSet" EntityType="Self.AdminSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ClassTeacherCourser" EntityType="Self.ClassTeacherCourser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Courser" EntityType="Self.Courser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ExamSet" EntityType="Self.ExamSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KnowPointSet" EntityType="Self.KnowPointSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Problem" EntityType="Self.Problem" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StatusSet" EntityType="Self.StatusSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ClassStudent" Association="Self.FK_ClassStudent">
-            <End Role="Class" EntitySet="Class" />
-            <End Role="Student" EntitySet="Student" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassTeacherCourserClass" Association="Self.FK_ClassTeacherCourserClass">
-            <End Role="Class" EntitySet="Class" />
-            <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassTeacherCourserCourser" Association="Self.FK_ClassTeacherCourserCourser">
-            <End Role="Courser" EntitySet="Courser" />
-            <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClassTeacherCourserTeacher" Association="Self.FK_ClassTeacherCourserTeacher">
-            <End Role="Teacher" EntitySet="Teacher" />
-            <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CourserKnowPoint" Association="Self.FK_CourserKnowPoint">
-            <End Role="Courser" EntitySet="Courser" />
-            <End Role="KnowPointSet" EntitySet="KnowPointSet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExamClassTeacherCourser" Association="Self.FK_ExamClassTeacherCourser">
-            <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
-            <End Role="ExamSet" EntitySet="ExamSet" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GradeExam" Association="Self.FK_GradeExam">
-            <End Role="ExamSet" EntitySet="ExamSet" />
-            <End Role="Grade" EntitySet="Grade" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GradeStudent" Association="Self.FK_GradeStudent">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="Grade" EntitySet="Grade" />
-          </AssociationSet>
-          <AssociationSet Name="FK_KnowPointProblem" Association="Self.FK_KnowPointProblem">
-            <End Role="KnowPointSet" EntitySet="KnowPointSet" />
-            <End Role="Problem" EntitySet="Problem" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="OjExamModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="OjExamModelStoreContainer">
+    <EntitySet Name="AdminSet" EntityType="OjExamModel.Store.AdminSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Class" EntityType="OjExamModel.Store.Class" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ClassTeacherCourser" EntityType="OjExamModel.Store.ClassTeacherCourser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Courser" EntityType="OjExamModel.Store.Courser" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExamSet" EntityType="OjExamModel.Store.ExamSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Grade" EntityType="OjExamModel.Store.Grade" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KnowPointSet" EntityType="OjExamModel.Store.KnowPointSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Problem" EntityType="OjExamModel.Store.Problem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StatusSet" EntityType="OjExamModel.Store.StatusSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Student" EntityType="OjExamModel.Store.Student" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Teacher" EntityType="OjExamModel.Store.Teacher" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ClassStudent" Association="OjExamModel.Store.FK_ClassStudent">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassTeacherCourserClass" Association="OjExamModel.Store.FK_ClassTeacherCourserClass">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassTeacherCourserCourser" Association="OjExamModel.Store.FK_ClassTeacherCourserCourser">
+      <End Role="Courser" EntitySet="Courser" />
+      <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassTeacherCourserTeacher" Association="OjExamModel.Store.FK_ClassTeacherCourserTeacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamClassTeacherCourser" Association="OjExamModel.Store.FK_ExamClassTeacherCourser">
+      <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
+      <End Role="ExamSet" EntitySet="ExamSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourserKnowPoint" Association="OjExamModel.Store.FK_CourserKnowPoint">
+      <End Role="Courser" EntitySet="Courser" />
+      <End Role="KnowPointSet" EntitySet="KnowPointSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GradeExam" Association="OjExamModel.Store.FK_GradeExam">
+      <End Role="ExamSet" EntitySet="ExamSet" />
+      <End Role="Grade" EntitySet="Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GradeStudent" Association="OjExamModel.Store.FK_GradeStudent">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Grade" EntitySet="Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KnowPointProblem" Association="OjExamModel.Store.FK_KnowPointProblem">
+      <End Role="KnowPointSet" EntitySet="KnowPointSet" />
+      <End Role="Problem" EntitySet="Problem" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AdminSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Pwd" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassTeacherCourser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherId" Type="int" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="CourserId" Type="int" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Courser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExamSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CTCId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StartTime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EndTime" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Rank" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClassTeacherCourser_Id" Type="int" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Score" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="ExamId" Type="int" Nullable="false" />
+    <Property Name="Problems" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Answers" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KnowPointSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CourserId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Problem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Src" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="KnowPointId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Rank" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatusSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IDcard" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Pwd" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeaId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IDcard" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Pwd" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DelFlag" Type="smallint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ClassStudent">
+    <End Role="Class" Type="OjExamModel.Store.Class" Multiplicity="1" />
+    <End Role="Student" Type="OjExamModel.Store.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassTeacherCourserClass">
+    <End Role="Class" Type="OjExamModel.Store.Class" Multiplicity="1" />
+    <End Role="ClassTeacherCourser" Type="OjExamModel.Store.ClassTeacherCourser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassTeacherCourser">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassTeacherCourserCourser">
+    <End Role="Courser" Type="OjExamModel.Store.Courser" Multiplicity="1" />
+    <End Role="ClassTeacherCourser" Type="OjExamModel.Store.ClassTeacherCourser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassTeacherCourser">
+        <PropertyRef Name="CourserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassTeacherCourserTeacher">
+    <End Role="Teacher" Type="OjExamModel.Store.Teacher" Multiplicity="1" />
+    <End Role="ClassTeacherCourser" Type="OjExamModel.Store.ClassTeacherCourser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClassTeacherCourser">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamClassTeacherCourser">
+    <End Role="ClassTeacherCourser" Type="OjExamModel.Store.ClassTeacherCourser" Multiplicity="1" />
+    <End Role="ExamSet" Type="OjExamModel.Store.ExamSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassTeacherCourser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExamSet">
+        <PropertyRef Name="ClassTeacherCourser_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourserKnowPoint">
+    <End Role="Courser" Type="OjExamModel.Store.Courser" Multiplicity="1" />
+    <End Role="KnowPointSet" Type="OjExamModel.Store.KnowPointSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KnowPointSet">
+        <PropertyRef Name="CourserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GradeExam">
+    <End Role="ExamSet" Type="OjExamModel.Store.ExamSet" Multiplicity="1" />
+    <End Role="Grade" Type="OjExamModel.Store.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="ExamId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GradeStudent">
+    <End Role="Student" Type="OjExamModel.Store.Student" Multiplicity="1" />
+    <End Role="Grade" Type="OjExamModel.Store.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KnowPointProblem">
+    <End Role="KnowPointSet" Type="OjExamModel.Store.KnowPointSet" Multiplicity="1" />
+    <End Role="Problem" Type="OjExamModel.Store.Problem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KnowPointSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Problem">
+        <PropertyRef Name="KnowPointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OjExamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AdminSet">
+        <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Loginname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Class">
           <Key>
@@ -299,6 +309,7 @@
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Student" Relationship="Self.FK_ClassStudent" FromRole="Class" ToRole="Student" />
           <NavigationProperty Name="ClassTeacherCourser" Relationship="Self.FK_ClassTeacherCourserClass" FromRole="Class" ToRole="ClassTeacherCourser" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="ClassTeacherCourser">
           <Key>
@@ -312,6 +323,7 @@
           <NavigationProperty Name="Courser" Relationship="Self.FK_ClassTeacherCourserCourser" FromRole="ClassTeacherCourser" ToRole="Courser" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK_ClassTeacherCourserTeacher" FromRole="ClassTeacherCourser" ToRole="Teacher" />
           <NavigationProperty Name="ExamSet" Relationship="Self.FK_ExamClassTeacherCourser" FromRole="ClassTeacherCourser" ToRole="ExamSet" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Courser">
           <Key>
@@ -323,8 +335,9 @@
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ClassTeacherCourser" Relationship="Self.FK_ClassTeacherCourserCourser" FromRole="Courser" ToRole="ClassTeacherCourser" />
           <NavigationProperty Name="KnowPointSet" Relationship="Self.FK_CourserKnowPoint" FromRole="Courser" ToRole="KnowPointSet" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
-        <EntityType Name="ExamSet">
+        <EntityType Name="Exam">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -338,6 +351,7 @@
           <Property Name="ClassTeacherCourser_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ClassTeacherCourser" Relationship="Self.FK_ExamClassTeacherCourser" FromRole="ExamSet" ToRole="ClassTeacherCourser" />
           <NavigationProperty Name="Grade" Relationship="Self.FK_GradeExam" FromRole="ExamSet" ToRole="Grade" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -352,8 +366,9 @@
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ExamSet" Relationship="Self.FK_GradeExam" FromRole="Grade" ToRole="ExamSet" />
           <NavigationProperty Name="Student" Relationship="Self.FK_GradeStudent" FromRole="Grade" ToRole="Student" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
-        <EntityType Name="KnowPointSet">
+        <EntityType Name="KnowPoint">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -364,6 +379,7 @@
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Courser" Relationship="Self.FK_CourserKnowPoint" FromRole="KnowPointSet" ToRole="Courser" />
           <NavigationProperty Name="Problem" Relationship="Self.FK_KnowPointProblem" FromRole="KnowPointSet" ToRole="Problem" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Problem">
           <Key>
@@ -376,8 +392,9 @@
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Rank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="KnowPointSet" Relationship="Self.FK_KnowPointProblem" FromRole="Problem" ToRole="KnowPointSet" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
-        <EntityType Name="StatusSet">
+        <EntityType Name="Status">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -394,10 +411,11 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IDcard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Class" Relationship="Self.FK_ClassStudent" FromRole="Student" ToRole="Class" />
           <NavigationProperty Name="Grade" Relationship="Self.FK_GradeStudent" FromRole="Student" ToRole="Grade" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -408,8 +426,9 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IDcard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ClassTeacherCourser" Relationship="Self.FK_ClassTeacherCourserTeacher" FromRole="Teacher" ToRole="ClassTeacherCourser" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
         </EntityType>
         <Association Name="FK_ClassStudent">
           <End Role="Class" Type="Self.Class" Multiplicity="1" />
@@ -461,7 +480,7 @@
         </Association>
         <Association Name="FK_ExamClassTeacherCourser">
           <End Role="ClassTeacherCourser" Type="Self.ClassTeacherCourser" Multiplicity="1" />
-          <End Role="ExamSet" Type="Self.ExamSet" Multiplicity="*" />
+          <End Role="ExamSet" Type="OjExamModel.Exam" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ClassTeacherCourser">
               <PropertyRef Name="Id" />
@@ -473,7 +492,7 @@
         </Association>
         <Association Name="FK_CourserKnowPoint">
           <End Role="Courser" Type="Self.Courser" Multiplicity="1" />
-          <End Role="KnowPointSet" Type="Self.KnowPointSet" Multiplicity="*" />
+          <End Role="KnowPointSet" Type="OjExamModel.KnowPoint" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Courser">
               <PropertyRef Name="Id" />
@@ -484,7 +503,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_GradeExam">
-          <End Role="ExamSet" Type="Self.ExamSet" Multiplicity="1" />
+          <End Role="ExamSet" Type="OjExamModel.Exam" Multiplicity="1" />
           <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ExamSet">
@@ -508,7 +527,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_KnowPointProblem">
-          <End Role="KnowPointSet" Type="Self.KnowPointSet" Multiplicity="1" />
+          <End Role="KnowPointSet" Type="OjExamModel.KnowPoint" Multiplicity="1" />
           <End Role="Problem" Type="Self.Problem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="KnowPointSet">
@@ -520,15 +539,15 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OjExamEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AdminSet" EntityType="Self.AdminSet" />
+          <EntitySet Name="AdminSet" EntityType="OjExamModel.Admin" />
           <EntitySet Name="Class" EntityType="Self.Class" />
           <EntitySet Name="ClassTeacherCourser" EntityType="Self.ClassTeacherCourser" />
           <EntitySet Name="Courser" EntityType="Self.Courser" />
-          <EntitySet Name="ExamSet" EntityType="Self.ExamSet" />
+          <EntitySet Name="ExamSet" EntityType="OjExamModel.Exam" />
           <EntitySet Name="Grade" EntityType="Self.Grade" />
-          <EntitySet Name="KnowPointSet" EntityType="Self.KnowPointSet" />
+          <EntitySet Name="KnowPointSet" EntityType="OjExamModel.KnowPoint" />
           <EntitySet Name="Problem" EntityType="Self.Problem" />
-          <EntitySet Name="StatusSet" EntityType="Self.StatusSet" />
+          <EntitySet Name="StatusSet" EntityType="OjExamModel.Status" />
           <EntitySet Name="Student" EntityType="Self.Student" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" />
           <AssociationSet Name="FK_ClassStudent" Association="Self.FK_ClassStudent">
@@ -572,135 +591,144 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OjExamModelStoreContainer" CdmEntityContainer="OjExamEntities">
-          <EntitySetMapping Name="AdminSet">
-            <EntityTypeMapping TypeName="OjExamModel.AdminSet">
-              <MappingFragment StoreEntitySet="AdminSet">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Loginname" ColumnName="Loginname" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Class">
-            <EntityTypeMapping TypeName="OjExamModel.Class">
-              <MappingFragment StoreEntitySet="Class">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClassTeacherCourser">
-            <EntityTypeMapping TypeName="OjExamModel.ClassTeacherCourser">
-              <MappingFragment StoreEntitySet="ClassTeacherCourser">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-                <ScalarProperty Name="CourserId" ColumnName="CourserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Courser">
-            <EntityTypeMapping TypeName="OjExamModel.Courser">
-              <MappingFragment StoreEntitySet="Courser">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ExamSet">
-            <EntityTypeMapping TypeName="OjExamModel.ExamSet">
-              <MappingFragment StoreEntitySet="ExamSet">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CTCId" ColumnName="CTCId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="Rank" ColumnName="Rank" />
-                <ScalarProperty Name="ClassTeacherCourser_Id" ColumnName="ClassTeacherCourser_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Grade">
-            <EntityTypeMapping TypeName="OjExamModel.Grade">
-              <MappingFragment StoreEntitySet="Grade">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Score" ColumnName="Score" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="ExamId" ColumnName="ExamId" />
-                <ScalarProperty Name="Problems" ColumnName="Problems" />
-                <ScalarProperty Name="Answers" ColumnName="Answers" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KnowPointSet">
-            <EntityTypeMapping TypeName="OjExamModel.KnowPointSet">
-              <MappingFragment StoreEntitySet="KnowPointSet">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="CourserId" ColumnName="CourserId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Problem">
-            <EntityTypeMapping TypeName="OjExamModel.Problem">
-              <MappingFragment StoreEntitySet="Problem">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Src" ColumnName="Src" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-                <ScalarProperty Name="KnowPointId" ColumnName="KnowPointId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Rank" ColumnName="Rank" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StatusSet">
-            <EntityTypeMapping TypeName="OjExamModel.StatusSet">
-              <MappingFragment StoreEntitySet="StatusSet">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Student">
-            <EntityTypeMapping TypeName="OjExamModel.Student">
-              <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StuId" ColumnName="StuId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IDcard" ColumnName="IDcard" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Teacher">
-            <EntityTypeMapping TypeName="OjExamModel.Teacher">
-              <MappingFragment StoreEntitySet="Teacher">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TeaId" ColumnName="TeaId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IDcard" ColumnName="IDcard" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OjExamModelStoreContainer" CdmEntityContainer="OjExamEntities">
+    <EntitySetMapping Name="AdminSet">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Admin)">
+        <MappingFragment StoreEntitySet="AdminSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Class">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Class)">
+        <MappingFragment StoreEntitySet="Class">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassTeacherCourser">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.ClassTeacherCourser)">
+        <MappingFragment StoreEntitySet="ClassTeacherCourser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="CourserId" ColumnName="CourserId" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courser">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Courser)">
+        <MappingFragment StoreEntitySet="Courser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamSet">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Exam)">
+        <MappingFragment StoreEntitySet="ExamSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CTCId" ColumnName="CTCId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="ClassTeacherCourser_Id" ColumnName="ClassTeacherCourser_Id" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grade">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Grade)">
+        <MappingFragment StoreEntitySet="Grade">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+          <ScalarProperty Name="Problems" ColumnName="Problems" />
+          <ScalarProperty Name="Answers" ColumnName="Answers" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KnowPointSet">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.KnowPoint)">
+        <MappingFragment StoreEntitySet="KnowPointSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CourserId" ColumnName="CourserId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Problem">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Problem)">
+        <MappingFragment StoreEntitySet="Problem">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Src" ColumnName="Src" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="KnowPointId" ColumnName="KnowPointId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusSet">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Status)">
+        <MappingFragment StoreEntitySet="StatusSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Student)">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StuId" ColumnName="StuId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IDcard" ColumnName="IDcard" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teacher">
+      <EntityTypeMapping TypeName="IsTypeOf(OjExamModel.Teacher)">
+        <MappingFragment StoreEntitySet="Teacher">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TeaId" ColumnName="TeaId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IDcard" ColumnName="IDcard" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -714,7 +742,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
       </DesignerInfoPropertySet>
     </Options>

@@ -20,7 +20,8 @@ namespace OjExam.Model
         public int KnowPointId { get; set; }
         public string Status { get; set; }
         public string Rank { get; set; }
+        public short DelFlag { get; set; }
     
-        public virtual KnowPointSet KnowPointSet { get; set; }
+        public virtual KnowPoint KnowPointSet { get; set; }
     }
 }

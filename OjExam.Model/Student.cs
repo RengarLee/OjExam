@@ -25,8 +25,9 @@ namespace OjExam.Model
         public string Name { get; set; }
         public string IDcard { get; set; }
         public int Status { get; set; }
-        public string Password { get; set; }
+        public string Pwd { get; set; }
         public int ClassId { get; set; }
+        public short DelFlag { get; set; }
     
         public virtual Class Class { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

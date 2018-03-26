@@ -17,18 +17,19 @@ namespace OjExam.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ClassTeacherCourser()
         {
-            this.ExamSet = new HashSet<ExamSet>();
+            this.ExamSet = new HashSet<Exam>();
         }
     
         public int Id { get; set; }
         public int TeacherId { get; set; }
         public int ClassId { get; set; }
         public int CourserId { get; set; }
+        public short DelFlag { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Courser Courser { get; set; }
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ExamSet> ExamSet { get; set; }
+        public virtual ICollection<Exam> ExamSet { get; set; }
     }
 }

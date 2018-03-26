@@ -19,10 +19,10 @@ namespace OjExam.DALFactory
     {
    
 	
-		public static IAdminSetDal GetAdminSetDal()
+		public static IAdminDal GetAdminDal()
 		{
-			return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".AdminSetDal")
-				as IAdminSetDal;
+			return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".AdminDal")
+				as IAdminDal;
 		}
 	
 		public static IClassDal GetClassDal()
@@ -43,10 +43,10 @@ namespace OjExam.DALFactory
 				as ICourserDal;
 		}
 	
-		public static IExamSetDal GetExamSetDal()
+		public static IExamDal GetExamDal()
 		{
-			return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".ExamSetDal")
-				as IExamSetDal;
+			return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".ExamDal")
+				as IExamDal;
 		}
 	
 		public static IGradeDal GetGradeDal()
@@ -55,10 +55,10 @@ namespace OjExam.DALFactory
 				as IGradeDal;
 		}
 	
-		public static IKnowPointSetDal GetKnowPointSetDal()
+		public static IKnowPointDal GetKnowPointDal()
 		{
-			return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".KnowPointSetDal")
-				as IKnowPointSetDal;
+			return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".KnowPointDal")
+				as IKnowPointDal;
 		}
 	
 		public static IProblemDal GetProblemDal()
@@ -67,10 +67,10 @@ namespace OjExam.DALFactory
 				as IProblemDal;
 		}
 	
-		public static IStatusSetDal GetStatusSetDal()
+		public static IStatusDal GetStatusDal()
 		{
-			return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".StatusSetDal")
-				as IStatusSetDal;
+			return Assembly.Load(assemblyName).CreateInstance(assemblyName + ".StatusDal")
+				as IStatusDal;
 		}
 	
 		public static IStudentDal GetStudentDal()

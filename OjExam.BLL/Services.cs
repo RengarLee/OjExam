@@ -5,17 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OjExam.DALFactory;
+using OjExam.EFDAL;
 using OjExam.IBLL;
 using OjExam.IDAL;
 using OjExam.Model;
 
 namespace OjExam.BLL
 {	
-	public partial class AdminSetService:BaseService<AdminSet>,IAdminSetService 
+	public partial class AdminService:BaseService<Admin>,IAdminService 
     {
 		public override void SetCurrentDal()
         {
-            CurrentDal = DbSession.AdminSetDal;
+            CurrentDal = DbSession.AdminDal;
         } 
 	}
 	
@@ -43,11 +44,11 @@ namespace OjExam.BLL
         } 
 	}
 	
-	public partial class ExamSetService:BaseService<ExamSet>,IExamSetService 
+	public partial class ExamService:BaseService<Exam>,IExamService 
     {
 		public override void SetCurrentDal()
         {
-            CurrentDal = DbSession.ExamSetDal;
+            CurrentDal = DbSession.ExamDal;
         } 
 	}
 	
@@ -59,11 +60,11 @@ namespace OjExam.BLL
         } 
 	}
 	
-	public partial class KnowPointSetService:BaseService<KnowPointSet>,IKnowPointSetService 
+	public partial class KnowPointService:BaseService<KnowPoint>,IKnowPointService 
     {
 		public override void SetCurrentDal()
         {
-            CurrentDal = DbSession.KnowPointSetDal;
+            CurrentDal = DbSession.KnowPointDal;
         } 
 	}
 	
@@ -75,11 +76,11 @@ namespace OjExam.BLL
         } 
 	}
 	
-	public partial class StatusSetService:BaseService<StatusSet>,IStatusSetService 
+	public partial class StatusService:BaseService<Status>,IStatusService 
     {
 		public override void SetCurrentDal()
         {
-            CurrentDal = DbSession.StatusSetDal;
+            CurrentDal = DbSession.StatusDal;
         } 
 	}
 	

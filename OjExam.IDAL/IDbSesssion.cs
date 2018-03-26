@@ -4,7 +4,7 @@ namespace OjExam.IDAL
     public partial interface IDbSession
     {   
 	 
-		IAdminSetDal AdminSetDal { get;}
+		IAdminDal AdminDal { get;}
 	 
 		IClassDal ClassDal { get;}
 	 
@@ -12,15 +12,15 @@ namespace OjExam.IDAL
 	 
 		ICourserDal CourserDal { get;}
 	 
-		IExamSetDal ExamSetDal { get;}
+		IExamDal ExamDal { get;}
 	 
 		IGradeDal GradeDal { get;}
 	 
-		IKnowPointSetDal KnowPointSetDal { get;}
+		IKnowPointDal KnowPointDal { get;}
 	 
 		IProblemDal ProblemDal { get;}
 	 
-		IStatusSetDal StatusSetDal { get;}
+		IStatusDal StatusDal { get;}
 	 
 		IStudentDal StudentDal { get;}
 	 

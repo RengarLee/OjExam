@@ -25,15 +25,15 @@ namespace OjExam.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AdminSet> AdminSet { get; set; }
+        public virtual DbSet<Admin> AdminSet { get; set; }
         public virtual DbSet<Class> Class { get; set; }
         public virtual DbSet<ClassTeacherCourser> ClassTeacherCourser { get; set; }
         public virtual DbSet<Courser> Courser { get; set; }
-        public virtual DbSet<ExamSet> ExamSet { get; set; }
+        public virtual DbSet<Exam> ExamSet { get; set; }
         public virtual DbSet<Grade> Grade { get; set; }
-        public virtual DbSet<KnowPointSet> KnowPointSet { get; set; }
+        public virtual DbSet<KnowPoint> KnowPointSet { get; set; }
         public virtual DbSet<Problem> Problem { get; set; }
-        public virtual DbSet<StatusSet> StatusSet { get; set; }
+        public virtual DbSet<Status> StatusSet { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
     }

@@ -21,8 +21,9 @@ namespace OjExam.Model
         public string Problems { get; set; }
         public string Answers { get; set; }
         public string Status { get; set; }
+        public short DelFlag { get; set; }
     
-        public virtual ExamSet ExamSet { get; set; }
+        public virtual Exam ExamSet { get; set; }
         public virtual Student Student { get; set; }
     }
 }

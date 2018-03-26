@@ -1,8 +1,14 @@
-﻿using OjExam.Model;
+﻿ 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OjExam.Model;
 
 namespace OjExam.IBLL
-{
-    public partial interface IAdminSetService:IBaseService<AdminSet>
+{	
+    public partial interface IAdminService:IBaseService<Admin>
     {
     }
 	
@@ -18,7 +24,7 @@ namespace OjExam.IBLL
     {
     }
 	
-    public partial interface IExamSetService:IBaseService<ExamSet>
+    public partial interface IExamService:IBaseService<Exam>
     {
     }
 	
@@ -26,7 +32,7 @@ namespace OjExam.IBLL
     {
     }
 	
-    public partial interface IKnowPointSetService:IBaseService<KnowPointSet>
+    public partial interface IKnowPointService:IBaseService<KnowPoint>
     {
     }
 	
@@ -34,7 +40,7 @@ namespace OjExam.IBLL
     {
     }
 	
-    public partial interface IStatusSetService:IBaseService<StatusSet>
+    public partial interface IStatusService:IBaseService<Status>
     {
     }
 	

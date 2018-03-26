@@ -142,7 +142,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -151,15 +155,18 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Hplus\css\animate.css" />
+    <Content Include="Content\Hplus\css\bootstrap.min.css" />
+    <Content Include="Content\Hplus\css\font-awesome.css" />
+    <Content Include="Content\Hplus\css\style.css" />
+    <Content Include="Content\Hplus\js\bootstrap.min.js" />
+    <Content Include="Content\Hplus\js\jquery.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -185,10 +192,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\UserLogin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Config\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Student\" />
+    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -202,6 +214,20 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OjExam.BLL\OjExam.BLL.csproj">
+      <Project>{9926AB1A-09FA-483A-99DC-1BE70E16D34D}</Project>
+      <Name>OjExam.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OjExam.IBLL\OjExam.IBLL.csproj">
+      <Project>{BB036A88-5E18-4AB5-A4FF-5F04E36D342A}</Project>
+      <Name>OjExam.IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OjExam.Model\OjExam.Model.csproj">
+      <Project>{c8a987b1-640d-48be-90d9-2b2ffdc8da49}</Project>
+      <Name>OjExam.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

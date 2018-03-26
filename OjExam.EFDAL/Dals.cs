@@ -30,7 +30,7 @@ namespace OjExam.EFDAL
 
 		
 
-	public partial class AdminSetDal:BaseDal<AdminSet>,IAdminSetDal
+	public partial class AdminDal:BaseDal<Admin>,IAdminDal
 
     {
 
@@ -62,7 +62,7 @@ namespace OjExam.EFDAL
 
 		
 
-	public partial class ExamSetDal:BaseDal<ExamSet>,IExamSetDal
+	public partial class ExamDal:BaseDal<Exam>,IExamDal
 
     {
 
@@ -78,7 +78,7 @@ namespace OjExam.EFDAL
 
 		
 
-	public partial class KnowPointSetDal:BaseDal<KnowPointSet>,IKnowPointSetDal
+	public partial class KnowPointDal:BaseDal<KnowPoint>,IKnowPointDal
 
     {
 
@@ -94,7 +94,7 @@ namespace OjExam.EFDAL
 
 		
 
-	public partial class StatusSetDal:BaseDal<StatusSet>,IStatusSetDal
+	public partial class StatusDal:BaseDal<Status>,IStatusDal
 
     {
 

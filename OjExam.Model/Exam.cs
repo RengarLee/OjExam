@@ -12,22 +12,26 @@ namespace OjExam.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class KnowPointSet
+    public partial class Exam
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KnowPointSet()
+        public Exam()
         {
-            this.Problem = new HashSet<Problem>();
+            this.Grade = new HashSet<Grade>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Remarks { get; set; }
-        public int CourserId { get; set; }
+        public string CTCId { get; set; }
         public string Status { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+        public string Rank { get; set; }
+        public int ClassTeacherCourser_Id { get; set; }
+        public short DelFlag { get; set; }
     
-        public virtual Courser Courser { get; set; }
+        public virtual ClassTeacherCourser ClassTeacherCourser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Problem> Problem { get; set; }
+        public virtual ICollection<Grade> Grade { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace OjExam.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class StatusSet
+    public partial class Status
     {
         public int Id { get; set; }
         public string Name { get; set; }

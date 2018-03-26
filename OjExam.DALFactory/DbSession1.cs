@@ -1,12 +1,13 @@
-﻿using OjExam.IDAL;
+﻿ 
+using OjExam.IDAL;
 
 namespace OjExam.DALFactory
 {
     public partial class DbSession :IDbSession
     {   		
-		public IAdminSetDal AdminSetDal
+		public IAdminDal AdminDal
 		{
-			get { return StaticDalFactory.GetAdminSetDal(); }
+			get { return StaticDalFactory.GetAdminDal(); }
 		}
 		
 		public IClassDal ClassDal
@@ -24,9 +25,9 @@ namespace OjExam.DALFactory
 			get { return StaticDalFactory.GetCourserDal(); }
 		}
 		
-		public IExamSetDal ExamSetDal
+		public IExamDal ExamDal
 		{
-			get { return StaticDalFactory.GetExamSetDal(); }
+			get { return StaticDalFactory.GetExamDal(); }
 		}
 		
 		public IGradeDal GradeDal
@@ -34,9 +35,9 @@ namespace OjExam.DALFactory
 			get { return StaticDalFactory.GetGradeDal(); }
 		}
 		
-		public IKnowPointSetDal KnowPointSetDal
+		public IKnowPointDal KnowPointDal
 		{
-			get { return StaticDalFactory.GetKnowPointSetDal(); }
+			get { return StaticDalFactory.GetKnowPointDal(); }
 		}
 		
 		public IProblemDal ProblemDal
@@ -44,9 +45,9 @@ namespace OjExam.DALFactory
 			get { return StaticDalFactory.GetProblemDal(); }
 		}
 		
-		public IStatusSetDal StatusSetDal
+		public IStatusDal StatusDal
 		{
-			get { return StaticDalFactory.GetStatusSetDal(); }
+			get { return StaticDalFactory.GetStatusDal(); }
 		}
 		
 		public IStudentDal StudentDal
@@ -59,5 +60,4 @@ namespace OjExam.DALFactory
 			get { return StaticDalFactory.GetTeacherDal(); }
 		}
 	}
-
 }

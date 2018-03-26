@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c15dc064dcd04d0e8e5613d5b554329e" Name="Diagram1">
-        <EntityTypeShape EntityType="OjExamModel.AdminSet" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OjExamModel.Admin" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OjExamModel.Class" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="OjExamModel.ClassTeacherCourser" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OjExamModel.Courser" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OjExamModel.ExamSet" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OjExamModel.Exam" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OjExamModel.Grade" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OjExamModel.KnowPointSet" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OjExamModel.KnowPoint" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OjExamModel.Problem" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OjExamModel.StatusSet" Width="1.5" PointX="7.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OjExamModel.Status" Width="1.5" PointX="7.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OjExamModel.Student" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OjExamModel.Teacher" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
         <AssociationConnector Association="OjExamModel.FK_ClassStudent" ManuallyRouted="false" />
