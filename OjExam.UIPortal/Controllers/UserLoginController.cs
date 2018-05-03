@@ -46,6 +46,11 @@ namespace OjExam.UIPortal.Controllers
             }
             return Content("fail");
         }
-        
+
+        public ActionResult Exit()
+        {
+            Session["User"] = null;
+            return Redirect("/UserLogin/Index");
+        }
     }
 }
