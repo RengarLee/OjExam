@@ -20,7 +20,6 @@ namespace OjExam.EFDAL
         #region Qurry
         public IQueryable<T> GetEntities(Expression<Func<T, bool>> whereLamdba)
         {
-            //return Db.Entry.GetEntities(whereLamdba);
             return Db.Set<T>().Where<T>(whereLamdba).AsQueryable();
         }
 

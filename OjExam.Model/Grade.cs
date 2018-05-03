@@ -20,10 +20,9 @@ namespace OjExam.Model
         public int ExamId { get; set; }
         public string Problems { get; set; }
         public string Answers { get; set; }
-        public string Status { get; set; }
         public short DelFlag { get; set; }
     
-        public virtual Exam ExamSet { get; set; }
         public virtual Student Student { get; set; }
+        public virtual Exam Exam { get; set; }
     }
 }

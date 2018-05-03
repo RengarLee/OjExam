@@ -24,7 +24,6 @@ namespace OjExam.Model
         public string Name { get; set; }
         public string Remarks { get; set; }
         public int CourserId { get; set; }
-        public string Status { get; set; }
         public short DelFlag { get; set; }
     
         public virtual Courser Courser { get; set; }

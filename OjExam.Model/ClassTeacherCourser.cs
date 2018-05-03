@@ -17,7 +17,7 @@ namespace OjExam.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ClassTeacherCourser()
         {
-            this.ExamSet = new HashSet<Exam>();
+            this.Exam = new HashSet<Exam>();
         }
     
         public int Id { get; set; }
@@ -30,6 +30,6 @@ namespace OjExam.Model
         public virtual Courser Courser { get; set; }
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exam> ExamSet { get; set; }
+        public virtual ICollection<Exam> Exam { get; set; }
     }
 }

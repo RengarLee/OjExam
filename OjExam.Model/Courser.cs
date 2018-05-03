@@ -18,18 +18,17 @@ namespace OjExam.Model
         public Courser()
         {
             this.ClassTeacherCourser = new HashSet<ClassTeacherCourser>();
-            this.KnowPointSet = new HashSet<KnowPoint>();
+            this.KnowPoint = new HashSet<KnowPoint>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Status { get; set; }
         public string Remarks { get; set; }
         public short DelFlag { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassTeacherCourser> ClassTeacherCourser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KnowPoint> KnowPointSet { get; set; }
+        public virtual ICollection<KnowPoint> KnowPoint { get; set; }
     }
 }

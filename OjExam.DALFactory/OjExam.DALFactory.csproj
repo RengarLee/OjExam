@@ -71,6 +71,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OjExam.EFDAL\OjExam.EFDAL.csproj">
+      <Project>{6b8ce7cc-b27f-40a6-a670-dfcb568b2b31}</Project>
+      <Name>OjExam.EFDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OjExam.IDAL\OjExam.IDAL.csproj">
       <Project>{819A81D6-AD24-460B-B850-F5C03A1D4AED}</Project>
       <Name>OjExam.IDAL</Name>

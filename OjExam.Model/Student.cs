@@ -24,7 +24,6 @@ namespace OjExam.Model
         public string StuId { get; set; }
         public string Name { get; set; }
         public string IDcard { get; set; }
-        public int Status { get; set; }
         public string Pwd { get; set; }
         public int ClassId { get; set; }
         public short DelFlag { get; set; }

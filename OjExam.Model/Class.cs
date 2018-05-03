@@ -23,7 +23,6 @@ namespace OjExam.Model
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Status { get; set; }
         public string Remarks { get; set; }
         public short DelFlag { get; set; }
     

@@ -62,10 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OjExam.DALFactory\OjExam.DALFactory.csproj">
-      <Project>{F81F8387-DA12-40DB-A503-668CB761A7BF}</Project>
-      <Name>OjExam.DALFactory</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OjExam.IDAL\OjExam.IDAL.csproj">
       <Project>{819A81D6-AD24-460B-B850-F5C03A1D4AED}</Project>
       <Name>OjExam.IDAL</Name>
