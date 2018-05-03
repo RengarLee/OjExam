@@ -54,6 +54,10 @@
       <Project>{F81F8387-DA12-40DB-A503-668CB761A7BF}</Project>
       <Name>OjExam.DALFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OjExam.EFDAL\OjExam.EFDAL.csproj">
+      <Project>{6b8ce7cc-b27f-40a6-a670-dfcb568b2b31}</Project>
+      <Name>OjExam.EFDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OjExam.IBLL\OjExam.IBLL.csproj">
       <Project>{BB036A88-5E18-4AB5-A4FF-5F04E36D342A}</Project>
       <Name>OjExam.IBLL</Name>

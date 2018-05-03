@@ -1,37 +1,73 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>首页 - OjExam</title>
-    @Styles.Render("~/Content/Layui/css")
+    <title>首页 - Benthink</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="css/toast.style.min.css">
+    <script type="text/javascript" src="js/toast.script.js"></script>
+
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script type="text/javascript" src="js/notification.js"></script>
 </head>
 <body>
 
+<!--
+顶栏->侧边栏
+<li top-bar top-id="1" class="layui-nav-item layui-this"><a href="javascript:;">控制台</a></li>
+    顶栏要带top-bar属性,top-id是顶栏的id,唯一.
+<ul left-bar left-id="1" class="layui-nav layui-nav-tree" lay-filter="left-nav" style="border-radius: 0;">
+    侧边栏要带left-bar属性,left-id是唯一的,值要和对应的顶栏的top-id一样.
 
+侧边栏->tab
+<a href="javascript:;" data-url="https://www.so.com/" data-id="4" tab-item>
+    链接到tab标签,带 tab-item 属性,要有data-url和data-id. 必填.
+    data-url是URL,data-id是唯一.
+-->
+
+    <!-- 布局容器 -->
     <div class="layui-layout layui-layout-admin">
+        <!-- 头部 -->
         <div class="layui-header">
             <div class="layui-logo">Benthink</div>
+            <!-- 头部区域（可配合layui已有的水平导航） -->
             <ul class="layui-nav layui-layout-left">
-                <li top-bar top-id="1" class="layui-nav-item layui-this"><a href="javascript:;"></a></li>
+              <li top-bar top-id="1" class="layui-nav-item layui-this"><a href="javascript:;">控制台</a></li>
+              <li top-bar top-id="2" class="layui-nav-item"><a href="javascript:;">商品管理</a></li>
+              <li top-bar top-id="3" class="layui-nav-item"><a href="javascript:;">用户</a></li>
+              <!-- <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                  <dd><a href="javascript:;">邮件管理</a></dd>
+                  <dd><a href="javascript:;">消息管理</a></dd>
+                  <dd><a href="javascript:;">授权管理</a></dd>
+                </dl>
+              </li> -->
             </ul>
+
             <ul class="layui-nav layui-layout-right">
-                <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        @RenderSection("Name")
-                    </a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">基本资料</a></dd>
-                        <dd><a href="">安全设置</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="">退了</a></li>
+              <li class="layui-nav-item">
+                <a href="javascript:;">
+                  <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                  贤心
+                </a>
+                <dl class="layui-nav-child">
+                  <dd><a href="">基本资料</a></dd>
+                  <dd><a href="">安全设置</a></dd>
+                </dl>
+              </li>
+              <li class="layui-nav-item"><a href="">退了</a></li>
             </ul>
-        </div>
+          </div>
+
         <!-- 侧边栏 -->
         <div class="layui-side layui-bg-black">
             <div class="layui-side-scroll">
-                @RenderBody()
+
                 <!-- 控制台的 -->
                 <ul left-bar left-id="1" class="layui-nav layui-nav-tree" lay-filter="left-nav" style="border-radius: 0;">
                     <li class="layui-nav-item layui-nav-itemed">
@@ -39,6 +75,7 @@
                             欢迎
                         </a>
                     </li>
+
                     <li class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;" data-url="http://amazeui.org/widgets/m" data-id="1" tab-item>
                             Amazeui Mobile
@@ -72,6 +109,8 @@
                         </dl>
                     </li>
                 </ul>
+
+                <!-- 商品管理的 -->
                 <ul left-bar left-id="2" class="layui-nav layui-nav-tree" lay-filter="left-nav" style="border-radius: 0;display:none;">
                     <li class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;" data-url="http://amazeui.org/widgets/m" data-id="21" tab-item>
@@ -106,6 +145,7 @@
                         </dl>
                     </li>
                 </ul>
+
                 <!-- 用户的 -->
                 <ul left-bar left-id="3" class="layui-nav layui-nav-tree" lay-filter="left-nav" style="border-radius: 0;display:none;">
                     <li class="layui-nav-item layui-nav-itemed">
@@ -142,8 +182,10 @@
                     </li>
                 </ul>
 
+
             </div>
         </div>
+
         <!-- 主体 -->
         <div class="layui-body">
             <!-- 顶部切换卡 -->
@@ -152,14 +194,16 @@
                 <div class="layui-tab-content" style="padding: 0;"></div>
             </div>
         </div>
+
         <!-- 底部 -->
         <div class="layui-footer" style="text-align: center; line-height: 44px;">
             Copyright © 2017 <a href="http://mumbai.cat" target="_blank">Benthink</a> Powered by Dust
         </div>
     </div>
 
-    @Scripts.Render("~/Content/Layui/js")
-    <script type="text/javascript">// $.Toast("标题", "你收到了一条消息", "success", {
+    <script type="text/javascript">
+
+    // $.Toast("标题", "你收到了一条消息", "success", {
     //     stack: true,
     //     has_icon:true,
     //     has_close_btn:true,
@@ -255,6 +299,7 @@
             $('.layui-side-scroll').find('[data-url][data-id]').eq(0).click();    // 点击第一个
         }
 
-    });</script>
+    });
+    </script>
 </body>
 </html>
