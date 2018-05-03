@@ -12,7 +12,7 @@ namespace OjExam.UIPortal.Fliters
         {
             if (filterContext.HttpContext.Session["User"] == null)
             {
-                filterContext.Result = new RedirectResult("~/UserLogin/Index");
+                //filterContext.Result = new RedirectResult("~/UserLogin/Index");
             }
             base.OnActionExecuting(filterContext);
         }

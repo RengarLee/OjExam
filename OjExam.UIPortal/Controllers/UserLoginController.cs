@@ -52,5 +52,7 @@ namespace OjExam.UIPortal.Controllers
             Session["User"] = null;
             return Redirect("/UserLogin/Index");
         }
+
+
     }
 }
