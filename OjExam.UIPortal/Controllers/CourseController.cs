@@ -23,8 +23,9 @@ namespace OjExam.UIPortal.Controllers
 
         public JsonResult GetList()
         {
-            int pageIndex = int.Parse(Request["pageIndex"] ?? "1");
+            int offset = int.Parse(Request["offest"] ?? "0");
             int pageSize = int.Parse(Request["limit"] ?? "20");
+            int pageIndex = (offset / pageSize)+1;
             var Data = CourserService.GetPageEntities(pageIndex, pageSize, out int total, u => u.DelFlag == delNormal, u => u.Id, true).Select(u => new { u.Id, u.Name }).ToList();
             return Json(new { total = total, rows = Data }, JsonRequestBehavior.AllowGet);
         }
