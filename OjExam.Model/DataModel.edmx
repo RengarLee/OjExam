@@ -104,7 +104,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StuId" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IDcard" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IDcard" Type="nvarchar(max)" />
           <Property Name="Pwd" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ClassId" Type="int" Nullable="false" />
           <Property Name="DelFlag" Type="smallint" Nullable="false" />
@@ -350,7 +350,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StuId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IDcard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDcard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Class" Relationship="Self.FK_ClassStudent" FromRole="Student" ToRole="Class" />

@@ -340,11 +340,11 @@
     <Content Include="Views\KnowPoint\Create.cshtml" />
     <Content Include="Views\KnowPoint\Edit.cshtml" />
     <Content Include="Views\Teacher\TeacherManger.cshtml" />
+    <Content Include="Views\Student\StudentManger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

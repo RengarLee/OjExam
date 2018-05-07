@@ -14,7 +14,6 @@ namespace OjExam.UIPortal.Controllers
         short delNormal = (short)Model.Enum.DelFlagEnum.Normal;
         private ITeacherService TeacherService = new TeacherService();
 
-        // GET: Calss
         #region Query
         public ActionResult Index()
         {
