@@ -21,7 +21,6 @@ namespace OjExam.DALFactory
                 db = new DbSession();
                 CallContext.SetData("DbSession", db);
             }
-
             return db;
         }
     }

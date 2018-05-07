@@ -11,6 +11,7 @@
     <title>Index</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrap-table/css")
+    @Styles.Render("~/Content/Layui/css")
 </head>
 <body>
     <div id="toolbar" class="btn-group">
@@ -22,30 +23,17 @@
         <table id="tb_class"></table>
     </div>
     @Scripts.Render("~/bundles/jquery")
-
+    @Scripts.Render("~/Content/Layui/js")
     @Scripts.Render("~/Content/bootstrap-table/js")
     @Scripts.Render("~/bundles/bootstrap")
-    <script type="text/javascript">
-        $(function () {
-            //初始化表格
-            initTable();
-            $("#btn_add").click(function () {
-                $.post("/Class/Create", { ClassName: $("#add").val() }, function (data) {
-                    if (data == "success") {
-                        initTable();
-                        alert("资料修改成功");
-                        $("#add").val("");
-                    } else if (data == "fail") {
-                        alert("修改失败");
-                    } else if (data == "exist") {
-                        alert("该专业名存在");
-                    }
-                });
-            });
-            $("#btn_removes").click(function () {
-                removeSelectClickEvent();
-            });
 
+    <script type="text/javascript">
+        layui.use('layer', function () {
+            var layer = layui.layer;
+        });   
+        $(function () {
+            $("#add").css("display", "none");
+            initTable();
         });
 
         //初始化表格
@@ -87,6 +75,20 @@
                 ]
             });
         };
+
+        $("#btn_add").on('click', function () {
+            layer.prompt({ title: '添加班级', formType: 0 }, function (pass, index) {
+                $.post("/Class/Create", { name: pass }, function (data) {
+                    if (data == "success") {
+                        initTable();
+                        layer.close(index);
+                    } else {
+                        layer.msg('添加失败请稍后再试！');
+                    }
+                });               
+            });
+        });
+
     </script>
 </body>
 </html>

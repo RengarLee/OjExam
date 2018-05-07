@@ -1,5 +1,6 @@
 ﻿using OjExam.BLL;
 using OjExam.IBLL;
+using OjExam.Model;
 using OjExam.UIPortal.Fliters;
 using System;
 using System.Collections.Generic;
@@ -34,25 +35,19 @@ namespace OjExam.UIPortal.Controllers
             return View();
         }
 
-        // GET: Calss/Create
         public ActionResult Create()
         {
-            return View();
-        }
-
-        // POST: Calss/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            Class c = new Class
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
+                Name = Request["name"],
+                DelFlag = delNormal
+            };
+            if (ClassService.Add(c))
             {
-                return View();
+                return Content("success");
+            } else
+            {
+                return Content("fail");
             }
         }
 
