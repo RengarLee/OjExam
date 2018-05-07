@@ -13,11 +13,13 @@ namespace OjExam.UIPortal.Controllers
     {
         short delNormal = (short)Model.Enum.DelFlagEnum.Normal;
         private IKnowPointService KnowPointService = new KnowPointService();
-
+        private ICourserService CourserService = new CourserService();
         // GET: Calss
         #region Query
         public ActionResult Index()
         {
+            var Course = CourserService.GetEntities(u => u.DelFlag == delNormal).AsQueryable();
+            ViewBag.CourserId = (from u in Course select new SelectListItem() { Text = u.Name, Value = u.Id + "" }).ToList();
             return View();
         }
 
@@ -39,11 +41,10 @@ namespace OjExam.UIPortal.Controllers
         #region Cretae
         public ActionResult Create()
         {
-            KnowPoint c = new KnowPoint
-            {
-                Name = Request["name"],
-                DelFlag = delNormal
-            };
+            KnowPoint c = new KnowPoint();
+            c.Name = Request["Name"];
+            c.CourserId = Convert.ToInt32(Request["CourserId"]);
+            c.DelFlag = delNormal;
             if (KnowPointService.Add(c))
             {
                 return Content("success");
@@ -53,6 +54,7 @@ namespace OjExam.UIPortal.Controllers
                 return Content("fail");
             }
         }
+
         #endregion
 
         #region Edit

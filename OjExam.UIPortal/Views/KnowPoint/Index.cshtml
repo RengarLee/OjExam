@@ -1,4 +1,5 @@
-﻿
+﻿@model OjExam.Model.KnowPoint
+
 @{
     Layout = null;
 }
@@ -12,7 +13,18 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrap-table/css")
     @Styles.Render("~/Content/Layui/css")
+    <style>
+        .layui-center {
+            text-align: center;
+            width: auto
+        }
+
+        .layui-form-item .layui-form-label {
+            width: 100px;
+        }
+    </style>
 </head>
+
 <body>
 
     <div id="toolbar" class="btn-group">
@@ -24,17 +36,47 @@
         <table id="tb_class"></table>
     </div>
 
+    <div id="addDiv">
+        <br />
+        <form id="form1" class="layui-form">
+            <div class="layui-form-item layui-center">
+                <div class="layui-inline">
+                    <label class="layui-form-label">知识点名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="Name" name="Name" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属学科</label>
+                    <div class="layui-input-block">
+                        @Html.DropDownList("CourserId")
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="layui-center">
+                <button type="button" id="btnSubmit" class="layui-btn">确认</button>
+                <button type="button" id="btnCancel" class="layui-btn">取消</button>
+            </div>
+        </form>
+        <br />
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Content/Layui/js")
     @Scripts.Render("~/Content/bootstrap-table/js")
     @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript">
-
         layui.use('layer', function () {
             var layer = layui.layer;
         });
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+        });
 
         $(function () {
+            $("#addDiv").css("display", "none");
             initTable();
         });
 
@@ -88,7 +130,7 @@
                         title: '查看知识点',
                         value: row["Name"],
                         formType: 0, btn2: function () {
-                            $.post("/KnowPoint/Delete", { id: row["Id"]}, function (data)   {
+                            $.post("/KnowPoint/Delete", { id: row["Id"] }, function (data) {
                                 if (data == "success") {
                                     initTable();
                                 } else {
@@ -111,17 +153,31 @@
         };
 
         $("#btn_add").on('click', function () {
-            layer.prompt({ title: '添加知识点', formType: 0 }, function (value, index) {
-                $.post("/KnowPoint/Create", { name: value }, function (data) {
-                    if (data == "success") {
-                        initTable();
-                        layer.close(index);
-                    } else {
-                        layer.msg('操作失败请稍后再试！');
-                    }
-                });
+            $("#Name").val("");
+            layer.open({
+                type: 1,
+                content: $('#addDiv'),
+                title: '添加知识点',
+                area: ['1000px', '500px']
             });
+        });
+
+        $("#btnCancel").click(function () {
+            layer.closeAll();
+            return;
+        });
+
+        $("#btnSubmit").click(function () {
+            $.post("/KnowPoint/Create", $("#form1").serialize(), function (data) {
+                if (data == "success") {
+                    initTable();
+                    layer.closeAll();
+                } else {
+                    layer.msg("操作失败请稍后再试")
+                }
+            })
         });
     </script>
 </body>
+
 </html>

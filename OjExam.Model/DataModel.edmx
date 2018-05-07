@@ -74,7 +74,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="CourserId" Type="int" Nullable="false" />
           <Property Name="DelFlag" Type="smallint" Nullable="false" />
         </EntityType>
@@ -509,7 +509,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CourserId" Type="Int32" Nullable="false" />
           <Property Name="DelFlag" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Courser" Relationship="OjExamModel.FK_CourserKnowPoint1" FromRole="KnowPoint1" ToRole="Courser" />
