@@ -114,11 +114,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TeaId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TeaId" Type="nvarchar(max)" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="IDcard" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Pwd" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DelFlag" Type="smallint" Nullable="false" />
+          <Property Name="IDcard" Type="nvarchar(max)" />
+          <Property Name="Pwd" Type="nvarchar(max)" />
+          <Property Name="DelFlag" Type="smallint" />
         </EntityType>
         <Association Name="FK_ClassStudent">
           <End Role="Class" Type="Self.Class" Multiplicity="1" />
@@ -362,12 +362,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TeaId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TeaId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IDcard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDcard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClassTeacherCourser" Relationship="Self.FK_ClassTeacherCourserTeacher" FromRole="Teacher" ToRole="ClassTeacherCourser" />
-          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <Property Name="DelFlag" Type="Int16" />
         </EntityType>
         <Association Name="FK_ClassStudent">
           <End Role="Class" Type="Self.Class" Multiplicity="1" />
