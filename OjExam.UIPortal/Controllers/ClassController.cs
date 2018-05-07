@@ -16,6 +16,7 @@ namespace OjExam.UIPortal.Controllers
         private IClassService ClassService = new ClassService();
 
         // GET: Calss
+        #region Query
         public ActionResult Index()
         {
             return View();
@@ -25,16 +26,17 @@ namespace OjExam.UIPortal.Controllers
         {
             int pageIndex = int.Parse(Request["pageIndex"] ?? "1");
             int pageSize = int.Parse(Request["limit"] ?? "20");
-            var Data = ClassService.GetPageEntities(pageIndex, pageSize, out int total, u =>u.DelFlag==delNormal, u => u.Id, true).Select(u => new { u.Id, u.Name }).ToList();
-            return Json(new { total=total, rows = Data}, JsonRequestBehavior.AllowGet);
+            var Data = ClassService.GetPageEntities(pageIndex, pageSize, out int total, u => u.DelFlag == delNormal, u => u.Id, true).Select(u => new { u.Id, u.Name }).ToList();
+            return Json(new { total = total, rows = Data }, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Calss/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
+        #endregion
 
+        #region Cretae
         public ActionResult Create()
         {
             Class c = new Class
@@ -45,54 +47,52 @@ namespace OjExam.UIPortal.Controllers
             if (ClassService.Add(c))
             {
                 return Content("success");
-            } else
+            }
+            else
+            {
+                return Content("fail");
+            }
+        }
+        #endregion
+
+        #region Edit
+
+        public ActionResult Edit()
+        {
+            int id = Convert.ToInt32(Request["id"]);
+            Class c = ClassService.GetEntities(u => u.Id == id).FirstOrDefault();
+            c.Name = Request["name"];
+            if (ClassService.Updata(c))
+            {
+                return Content("success");
+            }
+            else
             {
                 return Content("fail");
             }
         }
 
-        // GET: Calss/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+       
+        #endregion
 
-        // POST: Calss/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        #region Delete
+
+        public ActionResult Delete()
         {
-            try
+            int id = Convert.ToInt32(Request["id"]);
+            Class c = ClassService.GetEntities(u => u.Id == id).FirstOrDefault();
+            if (ClassService.Delete(c))
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                return Content("success");
             }
-            catch
+            else
             {
-                return View();
+                return Content("fail");
             }
         }
 
-        // GET: Calss/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Calss/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      
     }
+    #endregion
+
 }
