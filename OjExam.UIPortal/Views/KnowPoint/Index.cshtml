@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap-table/css")
+    @Styles.Render("~/Content/Layui/css")
+</head>
+<body>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+        </button>
+    </div>
+    <div>
+        <table id="tb_class"></table>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/Layui/js")
+    @Scripts.Render("~/Content/bootstrap-table/js")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+
+        layui.use('layer', function () {
+            var layer = layui.layer;
+        });
+
+        $(function () {
+            initTable();
+        });
+
+        //初始化表格
+        function initTable(queryParam) {
+            $("#tb_class").bootstrapTable('destroy');
+            $('#tb_class').bootstrapTable({
+                contentType: "application/x-www-form-urlencoded",
+                url: '/KnowPoint/GetList',
+                method: 'post',
+                toolbar: '#toolbar',
+                striped: true,
+                cache: false,
+                pagination: true,
+                queryParams: queryParam,
+                sidePagination: "server",
+                pageNumber: 1,
+                pageSize: 20,
+                pageList: [20, 50, 100],
+                smartDisplay: false,
+                showRefresh: true,
+                minimumCountColumns: 2,
+                clickToSelect: true,
+                uniqueId: "Id",
+                columns: [
+                    {
+                        field: 'Id',
+                        title: '知识点编号',
+                        width: '5%',
+                        visible: true,
+                        align: 'center',
+                    },
+                    {
+                        field: 'Name',
+                        title: '知识点名称',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                    {
+                        field: 'CourseName',
+                        title: '课程名称',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                ],
+                onDblClickRow: function (row, $element) {
+                    layer.prompt({
+                        btn: ['确认', '删除'],
+                        title: '查看知识点',
+                        value: row["Name"],
+                        formType: 0, btn2: function () {
+                            $.post("/KnowPoint/Delete", { id: row["Id"]}, function (data)   {
+                                if (data == "success") {
+                                    initTable();
+                                } else {
+                                    layer.msg('操作失败请稍后再试！');
+                                }
+                            });
+                        }
+                    }, function (value, index) {
+                        $.post("/KnowPoint/Edit", { id: row["Id"], name: value }, function (data) {
+                            if (data == "success") {
+                                initTable();
+                                layer.close(index);
+                            } else {
+                                layer.msg('操作失败请稍后再试！');
+                            }
+                        });
+                    });
+                }
+            });
+        };
+
+        $("#btn_add").on('click', function () {
+            layer.prompt({ title: '添加知识点', formType: 0 }, function (value, index) {
+                $.post("/KnowPoint/Create", { name: value }, function (data) {
+                    if (data == "success") {
+                        initTable();
+                        layer.close(index);
+                    } else {
+                        layer.msg('操作失败请稍后再试！');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
