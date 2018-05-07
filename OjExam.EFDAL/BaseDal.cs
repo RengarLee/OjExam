@@ -25,13 +25,15 @@ namespace OjExam.EFDAL
 
         public IQueryable<T> GetPageEntities<S>(int pageIndex, int pageSize, out int total, Expression<Func<T, bool>> whereLamdba, Expression<Func<T, S>> orderByLamdba, bool isAsc)
         {
-            total = Db.Set<T>().Count();
+            IQueryable<T> temp = Db.Set<T>().Where<T>(whereLamdba);
+            total = temp.Count();
             if (isAsc) {
-                return Db.Set<T>().Where<T>(whereLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).OrderBy<T, S>(orderByLamdba).AsQueryable();
+                temp = temp.OrderBy<T, S>(orderByLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).AsQueryable();
             } else
             {
-                return Db.Set<T>().Where<T>(whereLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).OrderByDescending<T, S>(orderByLamdba).AsQueryable();
+                temp = temp.OrderBy<T, S>(orderByLamdba).Skip<T>((pageIndex - 1) * pageSize).Take<T>(pageSize).AsQueryable();
             }
+            return temp;
         }
         #endregion
 

@@ -20,7 +20,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="DelFlag" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="ClassTeacherCourser">
@@ -287,7 +287,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Student" Relationship="Self.FK_ClassStudent" FromRole="Class" ToRole="Student" />
           <NavigationProperty Name="ClassTeacherCourser" Relationship="Self.FK_ClassTeacherCourserClass" FromRole="Class" ToRole="ClassTeacherCourser" />
           <Property Name="DelFlag" Type="Int16" Nullable="false" />

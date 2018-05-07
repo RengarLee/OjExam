@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap-table/css")
+</head>
+<body>
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+        </button>
+    </div>
+    <div>
+        <table id="tb_class"></table>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/Content/bootstrap-table/js")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        $(function () {
+            //初始化表格
+            initTable();
+            $("#btn_add").click(function () {
+                $.post("/Class/Create", { ClassName: $("#add").val() }, function (data) {
+                    if (data == "success") {
+                        initTable();
+                        alert("资料修改成功");
+                        $("#add").val("");
+                    } else if (data == "fail") {
+                        alert("修改失败");
+                    } else if (data == "exist") {
+                        alert("该专业名存在");
+                    }
+                });
+            });
+            $("#btn_removes").click(function () {
+                removeSelectClickEvent();
+            });
+
+        });
+
+        //初始化表格
+        function initTable(queryParam) {
+            $("#tb_class").bootstrapTable('destroy');
+            $('#tb_class').bootstrapTable({
+                contentType: "application/x-www-form-urlencoded",
+                url: '/Class/GetList',
+                method: 'post',
+                toolbar: '#toolbar',
+                striped: true,
+                cache: false,
+                pagination: true,
+                queryParams: queryParam,
+                sidePagination: "server",
+                pageNumber: 1,
+                pageSize: 20,
+                pageList: [20, 50, 100],
+                smartDisplay: false,
+                showRefresh: true,
+                minimumCountColumns: 2,
+                clickToSelect: true,
+                uniqueId: "Id",
+                columns: [
+                    {
+                        field: 'Id',
+                        title: '班级编号',
+                        width: '5%',
+                        visible: true,
+                        align: 'center',
+                    },
+                    {
+                        field: 'Name',
+                        title: '班级名称',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                ]
+            });
+        };
+    </script>
+</body>
+</html>

@@ -27,9 +27,11 @@ namespace OjExam.UIPortal
 
             //css
             bundles.Add(new StyleBundle("~/Content/Layui/css").Include("~/Content/layui-admin/css/style.css", "~/Content/layui-admin/layui/css/layui.css"));
-
+            bundles.Add(new StyleBundle("~/Content/bootstrap-table/css").Include("~/Content/bootstrap-table/bootstrap-table.css"));
+           
             //js
             bundles.Add(new ScriptBundle("~/Content/Layui/js").Include("~/Content/layui-admin/js/notification.js", "~/Content/layui-admin/layui/layui.js"));
+            bundles.Add(new ScriptBundle("~/Content/bootstrap-table/js").Include("~/Content/bootstrap-table/bootstrap-table.js", "~/Content/bootstrap-table/bootstrap-table-zh-CN.js"));
         }
     }
 }

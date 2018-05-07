@@ -9,7 +9,7 @@ namespace OjExam.UIPortal
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new LoginAttribute());
+            //filters.Add(new LoginAttribute());
         }
     }
 }
