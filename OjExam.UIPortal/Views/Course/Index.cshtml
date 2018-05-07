@@ -33,7 +33,7 @@
         layui.use('layer', function () {
             var layer = layui.layer;
         });
-        
+
         $(function () {
             initTable();
         });
@@ -43,7 +43,7 @@
             $("#tb_class").bootstrapTable('destroy');
             $('#tb_class').bootstrapTable({
                 contentType: "application/x-www-form-urlencoded",
-                url: '/Class/GetList',
+                url: '/Course/GetList',
                 method: 'post',
                 toolbar: '#toolbar',
                 striped: true,
@@ -62,14 +62,14 @@
                 columns: [
                     {
                         field: 'Id',
-                        title: '班级编号',
+                        title: '课程编号',
                         width: '5%',
                         visible: true,
                         align: 'center',
                     },
                     {
                         field: 'Name',
-                        title: '班级名称',
+                        title: '课程名称',
                         visible: true,
                         width: '10%',
                         align: 'center',
@@ -78,10 +78,10 @@
                 onDblClickRow: function (row, $element) {
                     layer.prompt({
                         btn: ['确认', '删除'],
-                        title: '查看班级',
+                        title: '查看课程',
                         value: row["Name"],
                         formType: 0, btn2: function () {
-                            $.post("/Class/Delete", { id: row["Id"]}, function (data)   {
+                            $.post("/Course/Delete", { id: row["Id"]}, function (data)   {
                                 if (data == "success") {
                                     initTable();
                                 } else {
@@ -90,7 +90,7 @@
                             });
                         }
                     }, function (value, index) {
-                        $.post("/Class/Edit", { id: row["Id"], name: value }, function (data) {
+                        $.post("/Course/Edit", { id: row["Id"], name: value }, function (data) {
                             if (data == "success") {
                                 initTable();
                                 layer.close(index);
@@ -104,15 +104,15 @@
         };
 
         $("#btn_add").on('click', function () {
-            layer.prompt({ title: '添加班级', formType: 0 }, function (value, index) {
-                $.post("/Class/Create", { name: value }, function (data) {
+            layer.prompt({ title: '添加课程', formType: 0 }, function (value, index) {
+                $.post("/Course/Create", { name: value }, function (data) {
                     if (data == "success") {
                         initTable();
                         layer.close(index);
                     } else {
                         layer.msg('操作失败请稍后再试！');
                     }
-                });               
+                });
             });
         });
     </script>
