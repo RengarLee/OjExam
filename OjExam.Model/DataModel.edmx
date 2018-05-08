@@ -47,12 +47,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CTCId" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="StartTime" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="EndTime" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Rank" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="StartTime" Type="nvarchar(max)" />
+          <Property Name="EndTime" Type="nvarchar(max)" />
           <Property Name="ClassTeacherCourser_Id" Type="int" Nullable="false" />
           <Property Name="DelFlag" Type="smallint" Nullable="false" />
         </EntityType>
@@ -492,12 +489,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CTCId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StartTime" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EndTime" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Rank" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EndTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClassTeacherCourser_Id" Type="Int32" Nullable="false" />
           <Property Name="DelFlag" Type="Int16" Nullable="false" />
           <NavigationProperty Name="ClassTeacherCourser" Relationship="OjExamModel.FK_ExamClassTeacherCourser1" FromRole="Exam1" ToRole="ClassTeacherCourser" />
@@ -673,11 +667,8 @@
               <MappingFragment StoreEntitySet="Exam">
                 <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
                 <ScalarProperty Name="ClassTeacherCourser_Id" ColumnName="ClassTeacherCourser_Id" />
-                <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CTCId" ColumnName="CTCId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

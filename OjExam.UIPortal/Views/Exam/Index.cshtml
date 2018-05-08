@@ -1,0 +1,184 @@
+﻿@model OjExam.Model.KnowPoint
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap-table/css")
+    @Styles.Render("~/Content/Layui/css")
+    <style>
+        .layui-center {
+            text-align: center;
+            width: auto
+        }
+
+        .layui-form-item .layui-form-label {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <table id="tb_class"></table>
+    </div>
+
+    <div id="addDiv">
+        <br />
+        <form id="form1" class="layui-form">
+            <div class="layui-form-item layui-center">
+                <div class="layui-inline">
+                    <label class="layui-form-label">考试名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="Name" name="Name" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属学科</label>
+                    <div class="layui-input-block">
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="layui-center">
+                <button type="button" id="btnSubmit" class="layui-btn">确认</button>
+                <button type="button" id="btnCancel" class="layui-btn">取消</button>
+            </div>
+        </form>
+        <br />
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/Layui/js")
+    @Scripts.Render("~/Content/bootstrap-table/js")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        layui.use('layer', function () {
+            var layer = layui.layer;
+        });
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+        });
+
+        $(function () {
+            $("#addDiv").css("display", "none");
+            initTable();
+        });
+
+        //初始化表格
+        function initTable(queryParam) {
+            $("#tb_class").bootstrapTable('destroy');
+            $('#tb_class').bootstrapTable({
+                contentType: "application/x-www-form-urlencoded",
+                url: '/Exam/GetList',
+                method: 'post',
+                striped: true,
+                cache: false,
+                pagination: false,
+                queryParams: queryParam,
+                minimumCountColumns: 2,
+                clickToSelect: true,
+                uniqueId: "Id",
+                columns: [
+                    {
+                        field: 'Id',
+                        title: '考试编号',
+                        width: '5%',
+                        visible: true,
+                        align: 'center',
+                    },
+                    {
+                        field: 'CourseName',
+                        title: '课程名称',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                    {
+                        field: 'ClassName',
+                        title: '班级名称',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                    {
+                        field: 'StartTime',
+                        title: '开始时间',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                    {
+                        field: 'EndTime',
+                        title: '结束时间',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                ],
+                onDblClickRow: function (row, $element) {
+                    layer.prompt({
+                        btn: ['确认', '删除'],
+                        title: '查看考试',
+                        value: row["Name"],
+                        formType: 0, btn2: function () {
+                            $.post("/KnowPoint/Delete", { id: row["Id"] }, function (data) {
+                                if (data == "success") {
+                                    initTable();
+                                } else {
+                                    layer.msg('操作失败请稍后再试！');
+                                }
+                            });
+                        }
+                    }, function (value, index) {
+                        $.post("/KnowPoint/Edit", { id: row["Id"], name: value }, function (data) {
+                            if (data == "success") {
+                                initTable();
+                                layer.close(index);
+                            } else {
+                                layer.msg('操作失败请稍后再试！');
+                            }
+                        });
+                    });
+                }
+            });
+        };
+
+        $("#btn_add").on('click', function () {
+            $("#Name").val("");
+            layer.open({
+                type: 1,
+                content: $('#addDiv'),
+                title: '添加考试',
+                area: ['1000px', '500px']
+            });
+        });
+
+        $("#btnCancel").click(function () {
+            layer.closeAll();
+            return;
+        });
+
+        $("#btnSubmit").click(function () {
+            $.post("/KnowPoint/Create", $("#form1").serialize(), function (data) {
+                if (data == "success") {
+                    initTable();
+                    layer.closeAll();
+                } else {
+                    layer.msg("操作失败请稍后再试")
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>

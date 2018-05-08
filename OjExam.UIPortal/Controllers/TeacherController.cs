@@ -17,6 +17,7 @@ namespace OjExam.UIPortal.Controllers
         #region Query
         public ActionResult Index()
         {
+            ViewData.Model = Session["User"] as Teacher;
             return View();
         }
 
