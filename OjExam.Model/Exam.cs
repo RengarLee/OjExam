@@ -22,8 +22,8 @@ namespace OjExam.Model
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string StartTime { get; set; }
-        public string EndTime { get; set; }
+        public Nullable<System.DateTime> StartTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
         public int ClassTeacherCourser_Id { get; set; }
         public short DelFlag { get; set; }
     

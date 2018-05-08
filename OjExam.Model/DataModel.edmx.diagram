@@ -18,13 +18,13 @@
         <AssociationConnector Association="OjExamModel.FK_ClassTeacherCourserTeacher" ManuallyRouted="false" />
         <AssociationConnector Association="OjExamModel.FK_GradeStudent" ManuallyRouted="false" />
         <EntityTypeShape EntityType="OjExamModel.Admin" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="OjExamModel.Exam" Width="1.5" PointX="5.25" PointY="12.625" />
         <EntityTypeShape EntityType="OjExamModel.KnowPoint" Width="1.5" PointX="3" PointY="12.625" />
         <EntityTypeShape EntityType="OjExamModel.Status" Width="1.5" PointX="7.375" PointY="3.75" />
-        <AssociationConnector Association="OjExamModel.FK_ExamClassTeacherCourser1" />
         <AssociationConnector Association="OjExamModel.FK_CourserKnowPoint1" />
-        <AssociationConnector Association="OjExamModel.FK_GradeExam1" />
         <AssociationConnector Association="OjExamModel.FK_KnowPointProblem1" />
+        <EntityTypeShape EntityType="OjExamModel.Exam" Width="1.5" PointX="5.25" PointY="11.875" />
+        <AssociationConnector Association="OjExamModel.FK_ExamClassTeacherCourser" />
+        <AssociationConnector Association="OjExamModel.FK_GradeExam" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

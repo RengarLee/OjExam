@@ -33,8 +33,8 @@ namespace OjExam.Model
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
         public virtual DbSet<Admin> Admin { get; set; }
-        public virtual DbSet<Exam> ExamSet { get; set; }
         public virtual DbSet<KnowPoint> KnowPointSet { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<Exam> Exam { get; set; }
     }
 }

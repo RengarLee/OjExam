@@ -48,8 +48,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="StartTime" Type="nvarchar(max)" />
-          <Property Name="EndTime" Type="nvarchar(max)" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
           <Property Name="ClassTeacherCourser_Id" Type="int" Nullable="false" />
           <Property Name="DelFlag" Type="smallint" Nullable="false" />
         </EntityType>
@@ -301,7 +301,7 @@
           <NavigationProperty Name="Courser" Relationship="Self.FK_ClassTeacherCourserCourser" FromRole="ClassTeacherCourser" ToRole="Courser" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK_ClassTeacherCourserTeacher" FromRole="ClassTeacherCourser" ToRole="Teacher" />
           <Property Name="DelFlag" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Exam" Relationship="OjExamModel.FK_ExamClassTeacherCourser1" FromRole="ClassTeacherCourser" ToRole="Exam1" />
+          <NavigationProperty Name="Exam" Relationship="OjExamModel.FK_ExamClassTeacherCourser" FromRole="ClassTeacherCourser" ToRole="Exam" />
         </EntityType>
         <EntityType Name="Courser">
           <Key>
@@ -326,7 +326,7 @@
           <Property Name="Answers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Student" Relationship="Self.FK_GradeStudent" FromRole="Grade" ToRole="Student" />
           <Property Name="DelFlag" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Exam" Relationship="OjExamModel.FK_GradeExam1" FromRole="Grade" ToRole="Exam1" />
+          <NavigationProperty Name="Exam" Relationship="OjExamModel.FK_GradeExam" FromRole="Grade" ToRole="Exam" />
         </EntityType>
         <EntityType Name="Problem">
           <Key>
@@ -455,24 +455,24 @@
             <End Role="Grade" EntitySet="Grade" />
           </AssociationSet>
           <EntitySet Name="Admin" EntityType="OjExamModel.Admin" />
-          <EntitySet Name="ExamSet" EntityType="OjExamModel.Exam" />
           <EntitySet Name="KnowPointSet" EntityType="OjExamModel.KnowPoint" />
           <EntitySet Name="Status" EntityType="OjExamModel.Status" />
-          <AssociationSet Name="FK_ExamClassTeacherCourser1" Association="OjExamModel.FK_ExamClassTeacherCourser1">
-            <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
-            <End Role="Exam1" EntitySet="ExamSet" />
-          </AssociationSet>
           <AssociationSet Name="FK_CourserKnowPoint1" Association="OjExamModel.FK_CourserKnowPoint1">
             <End Role="Courser" EntitySet="Courser" />
             <End Role="KnowPoint1" EntitySet="KnowPointSet" />
           </AssociationSet>
-          <AssociationSet Name="FK_GradeExam1" Association="OjExamModel.FK_GradeExam1">
-            <End Role="Exam1" EntitySet="ExamSet" />
-            <End Role="Grade" EntitySet="Grade" />
-          </AssociationSet>
           <AssociationSet Name="FK_KnowPointProblem1" Association="OjExamModel.FK_KnowPointProblem1">
             <End Role="KnowPoint1" EntitySet="KnowPointSet" />
             <End Role="Problem" EntitySet="Problem" />
+          </AssociationSet>
+          <EntitySet Name="Exam" EntityType="OjExamModel.Exam" />
+          <AssociationSet Name="FK_ExamClassTeacherCourser" Association="OjExamModel.FK_ExamClassTeacherCourser">
+            <End Role="ClassTeacherCourser" EntitySet="ClassTeacherCourser" />
+            <End Role="Exam" EntitySet="Exam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeExam" Association="OjExamModel.FK_GradeExam">
+            <End Role="Exam" EntitySet="Exam" />
+            <End Role="Grade" EntitySet="Grade" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admin">
@@ -483,19 +483,6 @@
           <Property Name="LName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Pwd" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DelFlag" Type="Int16" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Exam">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StartTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EndTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClassTeacherCourser_Id" Type="Int32" Nullable="false" />
-          <Property Name="DelFlag" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="ClassTeacherCourser" Relationship="OjExamModel.FK_ExamClassTeacherCourser1" FromRole="Exam1" ToRole="ClassTeacherCourser" />
-          <NavigationProperty Name="Grade" Relationship="OjExamModel.FK_GradeExam1" FromRole="Exam1" ToRole="Grade" />
         </EntityType>
         <EntityType Name="KnowPoint">
           <Key>
@@ -517,18 +504,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK_ExamClassTeacherCourser1">
-          <End Type="OjExamModel.ClassTeacherCourser" Role="ClassTeacherCourser" Multiplicity="1" />
-          <End Type="OjExamModel.Exam" Role="Exam1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassTeacherCourser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Exam1">
-              <PropertyRef Name="ClassTeacherCourser_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CourserKnowPoint1">
           <End Type="OjExamModel.Courser" Role="Courser" Multiplicity="1" />
           <End Type="OjExamModel.KnowPoint" Role="KnowPoint1" Multiplicity="*" />
@@ -541,18 +516,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GradeExam1">
-          <End Type="OjExamModel.Exam" Role="Exam1" Multiplicity="1" />
-          <End Type="OjExamModel.Grade" Role="Grade" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Exam1">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Grade">
-              <PropertyRef Name="ExamId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_KnowPointProblem1">
           <End Type="OjExamModel.KnowPoint" Role="KnowPoint1" Multiplicity="1" />
           <End Type="OjExamModel.Problem" Role="Problem" Multiplicity="*" />
@@ -562,6 +525,43 @@
             </Principal>
             <Dependent Role="Problem">
               <PropertyRef Name="KnowPointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="ClassTeacherCourser_Id" Type="Int32" Nullable="false" />
+          <Property Name="DelFlag" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ClassTeacherCourser" Relationship="OjExamModel.FK_ExamClassTeacherCourser" FromRole="Exam" ToRole="ClassTeacherCourser" />
+          <NavigationProperty Name="Grade" Relationship="OjExamModel.FK_GradeExam" FromRole="Exam" ToRole="Grade" />
+        </EntityType>
+        <Association Name="FK_ExamClassTeacherCourser">
+          <End Type="OjExamModel.ClassTeacherCourser" Role="ClassTeacherCourser" Multiplicity="1" />
+          <End Type="OjExamModel.Exam" Role="Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassTeacherCourser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="ClassTeacherCourser_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeExam">
+          <End Type="OjExamModel.Exam" Role="Exam" Multiplicity="1" />
+          <End Type="OjExamModel.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="ExamId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -662,18 +662,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ExamSet">
-            <EntityTypeMapping TypeName="OjExamModel.Exam">
-              <MappingFragment StoreEntitySet="Exam">
-                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
-                <ScalarProperty Name="ClassTeacherCourser_Id" ColumnName="ClassTeacherCourser_Id" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="KnowPointSet">
             <EntityTypeMapping TypeName="OjExamModel.KnowPoint">
               <MappingFragment StoreEntitySet="KnowPoint">
@@ -689,6 +677,18 @@
             <EntityTypeMapping TypeName="OjExamModel.Status">
               <MappingFragment StoreEntitySet="Status">
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exam">
+            <EntityTypeMapping TypeName="OjExamModel.Exam">
+              <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
+                <ScalarProperty Name="ClassTeacherCourser_Id" ColumnName="ClassTeacherCourser_Id" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

@@ -20,7 +20,7 @@
         }
 
         .layui-form-item .layui-form-label {
-            width: 100px;
+            width: 120px;
         }
     </style>
 </head>
@@ -34,16 +34,18 @@
     <div id="addDiv">
         <br />
         <form id="form1" class="layui-form">
+            <input type="hidden" id="ExamId" name="Id" value="" />
             <div class="layui-form-item layui-center">
                 <div class="layui-inline">
-                    <label class="layui-form-label">考试名称</label>
+                    <label class="layui-form-label">考试开始时间</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="Name" name="Name" autocomplete="off" class="layui-input">
+                        <input name="StartTime" type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd HH:mm:ss">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label class="layui-form-label">所属学科</label>
-                    <div class="layui-input-block">
+                    <label class="layui-form-label">考试结束时间</label>
+                    <div class="layui-input-inline">
+                        <input name="EndTime" type="text" class="layui-input" id="test2" placeholder="yyyy-MM-dd HH:mm:ss">
                     </div>
                 </div>
             </div>
@@ -57,9 +59,11 @@
         <br />
     </div>
     @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/datapattern.js"></script>
     @Scripts.Render("~/Content/Layui/js")
     @Scripts.Render("~/Content/bootstrap-table/js")
     @Scripts.Render("~/bundles/bootstrap")
+
     <script type="text/javascript">
         layui.use('layer', function () {
             var layer = layui.layer;
@@ -68,13 +72,25 @@
             var form = layui.form;
             form.render();
         });
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //日期时间选择器
+            laydate.render({
+                elem: '#test1'
+                , type: 'datetime'
+            });
+
+            laydate.render({
+                elem: '#test2'
+                , type: 'datetime'
+            });
+        });
 
         $(function () {
             $("#addDiv").css("display", "none");
             initTable();
         });
 
-        //初始化表格
         function initTable(queryParam) {
             $("#tb_class").bootstrapTable('destroy');
             $('#tb_class').bootstrapTable({
@@ -87,6 +103,7 @@
                 queryParams: queryParam,
                 minimumCountColumns: 2,
                 clickToSelect: true,
+                detailView: true,
                 uniqueId: "Id",
                 columns: [
                     {
@@ -100,76 +117,77 @@
                         field: 'CourseName',
                         title: '课程名称',
                         visible: true,
-                        width: '10%',
+                        width: '20%',
                         align: 'center',
                     },
                     {
                         field: 'ClassName',
                         title: '班级名称',
                         visible: true,
-                        width: '10%',
+                        width: '20%',
                         align: 'center',
                     },
                     {
                         field: 'StartTime',
                         title: '开始时间',
                         visible: true,
-                        width: '10%',
+                        width: '20%',
+
                         align: 'center',
+                        formatter: function (value, row, index) {
+                            return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d h:m");
+                        }
                     },
                     {
                         field: 'EndTime',
                         title: '结束时间',
                         visible: true,
-                        width: '10%',
+                        width: '20%',
                         align: 'center',
+                        formatter: function (value, row, index) {
+                            return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d h:m");
+                        }
                     },
                 ],
                 onDblClickRow: function (row, $element) {
-                    layer.prompt({
-                        btn: ['确认', '删除'],
-                        title: '查看考试',
-                        value: row["Name"],
-                        formType: 0, btn2: function () {
-                            $.post("/KnowPoint/Delete", { id: row["Id"] }, function (data) {
-                                if (data == "success") {
-                                    initTable();
-                                } else {
-                                    layer.msg('操作失败请稍后再试！');
-                                }
-                            });
-                        }
-                    }, function (value, index) {
-                        $.post("/KnowPoint/Edit", { id: row["Id"], name: value }, function (data) {
-                            if (data == "success") {
-                                initTable();
-                                layer.close(index);
-                            } else {
-                                layer.msg('操作失败请稍后再试！');
-                            }
-                        });
+                    layer.open({
+                        type: 1,
+                        content: $('#addDiv'),
+                        title: '考试时间',
+                        area: ['1000px', '500px']
                     });
+                    $("#ExamId").val(row["Id"]);
+                },
+                onExpandRow: function (index, row, $detail) {
+                    initSubTable(index, row, $detail);
                 }
             });
         };
-
-        $("#btn_add").on('click', function () {
-            $("#Name").val("");
-            layer.open({
-                type: 1,
-                content: $('#addDiv'),
-                title: '添加考试',
-                area: ['1000px', '500px']
+        //子表
+        function initSubTable(index, row, $detail) {
+            var parentid = row.MENU_ID;
+            var cur_table = $detail.html('<table></table>').find('table');
+            $(cur_table).bootstrapTable({
+                method: 'get',
+                queryParams: { strParentID: parentid },
+                ajaxOptions: { strParentID: parentid },
+                clickToSelect: true,
+                uniqueId: "Id",
+                columns: [{
+                    field: 'MENU_NAME',
+                    title: '学号'
+                }, {
+                    field: 'MENU_URL',
+                    title: '学生姓名'
+                }, {
+                    field: 'PARENT_ID',
+                    title: '成绩'
+                },]
             });
-        });
-
-        $("#btnCancel").click(function () {
-            layer.closeAll();
-            return;
-        });
+        }
 
         $("#btnSubmit").click(function () {
-            $.post("/KnowPoint/Create", $("#form1").serialize(), function (data) {
+            $.post("/Exam/Create", $("#form1").serialize(), function (data) {
                 if (data == "success") {
                     initTable();
                     layer.closeAll();
@@ -177,6 +195,11 @@
                     layer.msg("操作失败请稍后再试")
                 }
             })
+        });
+
+        $("#btnCancel").click(function () {
+            layer.closeAll();
+            return;
         });
     </script>
 </body>

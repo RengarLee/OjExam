@@ -42,5 +42,26 @@ namespace OjExam.UIPortal.Controllers
             }
            
         }
+
+        public ActionResult Create()
+        {
+            int Id = Convert.ToInt32(Request["Id"]);
+            DateTime StartTime = Convert.ToDateTime(Request["StartTime"]);
+            DateTime EndTime = Convert.ToDateTime(Request["EndTime"]);
+            Exam exam = ExamService.GetEntities(u => u.Id==Id).FirstOrDefault();
+            exam.StartTime = StartTime;
+            exam.EndTime = EndTime;
+            exam.DelFlag = delNormal;
+            if (ExamService.Updata(exam))
+            {
+                return Content("success");
+            }
+            else
+            {
+                return Content("fail");
+            }
+
+        }
+
     }
 }
