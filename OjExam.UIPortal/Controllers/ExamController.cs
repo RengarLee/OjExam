@@ -22,6 +22,11 @@ namespace OjExam.UIPortal.Controllers
             return View();
         }
 
+        public ActionResult Query()
+        {
+            return View();
+        }
+
         public JsonResult GetList()
         {
 
@@ -60,7 +65,6 @@ namespace OjExam.UIPortal.Controllers
             {
                 return Content("fail");
             }
-
         }
 
     }
