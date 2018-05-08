@@ -1,19 +1,10 @@
 ﻿@model OjExam.Model.Teacher
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
-        Teacher
-    </div>
-</body>
-</html>
+    @section Name{
+        @Model.Name
+    }
+    <li class="layui-nav-item layui-nav-itemed">
+        <a href="javascript:;" data-url="/" data-id="1" tab-item>
+            考试管理
+        </a>
+    </li>

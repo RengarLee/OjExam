@@ -12,10 +12,12 @@ namespace OjExam.UIPortal.Controllers
     public class ClassTeacherCourserController : Controller
     {
         short delNormal = (short)Model.Enum.DelFlagEnum.Normal;
+        short delDelete = (short)Model.Enum.DelFlagEnum.Delete;
         private IClassTeacherCourserService ClassTeacherCourserService = new ClassTeacherCourserService();
         private IClassService ClassService = new ClassService();
         private ITeacherService TeacherService = new TeacherService();
         private ICourserService CourserService = new CourserService();
+        private IExamService ExamService = new ExamService();
         // GET: Calss
         #region Query
         public ActionResult Index()
@@ -51,9 +53,19 @@ namespace OjExam.UIPortal.Controllers
                 ClassId = Convert.ToInt32(Request["ClassId"]),
                 DelFlag = delNormal,
             };
+
             if (ClassTeacherCourserService.Add(c))
             {
-                return Content("success");
+                Exam e = new Exam
+                {
+                    ClassTeacherCourser_Id = c.Id,
+                    DelFlag = delDelete,
+                };
+                if (ExamService.Add(e))
+                {
+                    return Content("success");
+                }
+                return Content("fail");
             }
             else
             {
