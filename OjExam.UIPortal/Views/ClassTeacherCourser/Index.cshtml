@@ -138,28 +138,19 @@
                     },
                 ],
                 onDblClickRow: function (row, $element) {
-                    layer.prompt({
-                        btn: ['确认', '删除'],
-                        title: '查看课程',
-                        value: row["Name"],
-                        formType: 0, btn2: function () {
-                            $.post("/ClassTeacherCourser/Delete", { id: row["Id"] }, function (data) {
-                                if (data == "success") {
-                                    initTable();
-                                } else {
-                                    layer.msg('操作失败请稍后再试！');
-                                }
-                            });
-                        }
-                    }, function (value, index) {
-                        $.post("/ClassTeacherCourser/Edit", { id: row["Id"], name: value }, function (data) {
+                    layer.confirm('确认删除该课程？', {
+                        btn: ['删除', '取消'] 
+                    }, function () {
+                        $.post("/ClassTeacherCourser/Delete", { id: row["Id"] }, function (data) {
                             if (data == "success") {
                                 initTable();
-                                layer.close(index);
+                                layer.closeAll();
                             } else {
                                 layer.msg('操作失败请稍后再试！');
                             }
                         });
+                    }, function () {
+                        layer.closeAll();
                     });
                 }
             });

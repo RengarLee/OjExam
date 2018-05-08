@@ -47,8 +47,9 @@ namespace OjExam.UIPortal.Controllers
             ClassTeacherCourser c = new ClassTeacherCourser
             {
                 TeacherId = Convert.ToInt32(Request["TeacherId"]),
-                CourserId = Convert.ToInt32(Request["CourserId"]),
+                CourserId = Convert.ToInt32(Request["CourseId"]),
                 ClassId = Convert.ToInt32(Request["ClassId"]),
+                DelFlag = delNormal,
             };
             if (ClassTeacherCourserService.Add(c))
             {
