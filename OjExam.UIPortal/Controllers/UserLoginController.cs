@@ -32,16 +32,19 @@ namespace OjExam.UIPortal.Controllers
             if (admin != null)
             {
                 Session["User"] = admin;
+                Session["Type"] = 0;
                 return Redirect("/Admin/Index");
             }
             if (teacher != null)
             {
                 Session["User"] = teacher;
+                Session["Type"] = 1;
                 return Redirect("/Teacher/Index");
             }
             if(student != null)
             {
                 Session["User"] = student;
+                Session["Type"] = 2;
                 return Redirect("/Student/Index");
             }
             return Content("fail");
