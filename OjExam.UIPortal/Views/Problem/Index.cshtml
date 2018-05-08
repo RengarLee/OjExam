@@ -1,0 +1,194 @@
+﻿@model OjExam.Model.Problem
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap-table/css")
+    @Styles.Render("~/Content/Layui/css")
+    <style>
+        .layui-center {
+            text-align: center;
+            width: auto
+        }
+
+        .layui-form-item .layui-form-label {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+        </button>
+    </div>
+    <div>
+        <table id="tb_class"></table>
+    </div>
+
+    <div id="addDiv">
+        <br />
+        <form id="form1" class="layui-form">
+            <div class="layui-form-item layui-center">
+                <div class="layui-inline">
+                    <input type="hidden" name="src" id="src" />
+                    <img src="" id="Image" name="src" style="width:300px;height:auto">
+                    <button type="button" class="layui-btn" id="upload">
+                        <i class="layui-icon">&#xe67c;</i>上传试题
+                    </button>
+                </div>
+                <br />
+                <div class="layui-inline">
+                    <label class="layui-form-label">题目答案</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="Answer" name="Answer" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">所属知识点</label>
+                    <div class="layui-input-block">
+                        @Html.DropDownList("KnowPointId")
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="layui-center">
+                <button type="button" id="btnSubmit" class="layui-btn">确认</button>
+                <button type="button" id="btnCancel" class="layui-btn">取消</button>
+            </div>
+        </form>
+        <br />
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/Layui/js")
+    @Scripts.Render("~/Content/bootstrap-table/js")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        layui.use('layer', function () {
+            var layer = layui.layer;
+        });
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+        });
+
+        layui.use('upload', function () {
+            var upload = layui.upload;
+            var uploadInst = upload.render({
+                elem: '#upload' //绑定元素
+                , url: '/Problem/UploadImage'
+                , accept: 'images'
+                , done: function (res) {
+                    $("#Image").attr("src", res["src"]);
+                    $("#src").val(res["src"]);
+                }
+            });
+        });
+        $(function () {
+            $("#addDiv").css("display", "none");
+            initTable();
+        });
+
+        //初始化表格
+        function initTable(queryParam) {
+            $("#tb_class").bootstrapTable('destroy');
+            $('#tb_class').bootstrapTable({
+                contentType: "application/x-www-form-urlencoded",
+                url: '/Problem/GetList',
+                method: 'post',
+                toolbar: '#toolbar',
+                striped: true,
+                cache: false,
+                pagination: true,
+                queryParams: queryParam,
+                sidePagination: "server",
+                pageNumber: 1,
+                pageSize: 20,
+                pageList: [20, 50, 100],
+                smartDisplay: false,
+                showRefresh: true,
+                minimumCountColumns: 2,
+                clickToSelect: true,
+                uniqueId: "Id",
+                columns: [
+                    {
+                        field: 'Id',
+                        title: '题目编号',
+                        width: '5%',
+                        visible: true,
+                        align: 'center',
+                    },
+                    {
+                        field: 'Answer',
+                        title: '答案',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                    {
+                        field: 'KonwPointName',
+                        title: '所属知识点',
+                        visible: true,
+                        width: '10%',
+                        align: 'center',
+                    },
+                ],
+                onDblClickRow: function (row, $element) {
+                    layer.confirm('确认删除该题目？', {
+                        btn: ['删除', '取消']
+                    }, function () {
+                        $.post("/Problem/Delete", { id: row["Id"] }, function (data) {
+                            if (data == "success") {
+                                initTable();
+                                layer.closeAll();
+                            } else {
+                                layer.msg('操作失败请稍后再试！');
+                            }
+                        });
+                    }, function () {
+                        layer.closeAll();
+                    });
+                }
+            });
+        };
+
+        $("#btn_add").on('click', function () {
+            $("#Name").val("");
+            layer.open({
+                type: 1,
+                content: $('#addDiv'),
+                title: '添加题目',
+                area: ['1000px', '500px']
+            });
+        });
+
+        $("#btnSubmit").click(function () {
+            $.post("/Problem/Create", $("#form1").serialize(), function (data) {
+                if (data == "success") {
+                    initTable();
+                    layer.closeAll();
+                } else {
+                    layer.msg("操作失败请稍后再试")
+                }
+            })
+        });
+
+        $("#btnCancel").click(function () {
+            layer.closeAll();
+            return;
+        });
+    </script>
+</body>
+
+</html>

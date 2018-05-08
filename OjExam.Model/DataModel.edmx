@@ -83,7 +83,6 @@
           <Property Name="Src" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
           <Property Name="KnowPointId" Type="int" Nullable="false" />
-          <Property Name="Rank" Type="nvarchar(max)" Nullable="false" />
           <Property Name="DelFlag" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="Status">
@@ -336,7 +335,6 @@
           <Property Name="Src" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="KnowPointId" Type="Int32" Nullable="false" />
-          <Property Name="Rank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DelFlag" Type="Int16" Nullable="false" />
           <NavigationProperty Name="KnowPoint" Relationship="OjExamModel.FK_KnowPointProblem1" FromRole="Problem" ToRole="KnowPoint1" />
         </EntityType>
@@ -622,7 +620,6 @@
           <ScalarProperty Name="Src" ColumnName="Src" />
           <ScalarProperty Name="Answer" ColumnName="Answer" />
           <ScalarProperty Name="KnowPointId" ColumnName="KnowPointId" />
-          <ScalarProperty Name="Rank" ColumnName="Rank" />
           <ScalarProperty Name="DelFlag" ColumnName="DelFlag" />
         </MappingFragment>
       </EntityTypeMapping>
