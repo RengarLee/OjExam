@@ -171,22 +171,21 @@
         };
         //子表
         function initSubTable(index, row, $detail) {
-            var parentid = row.MENU_ID;
+            var parentid = row.Id;
             var cur_table = $detail.html('<table></table>').find('table');
             $(cur_table).bootstrapTable({
-                method: 'get',
-                queryParams: { strParentID: parentid },
-                ajaxOptions: { strParentID: parentid },
+                queryParams: { id: parentid },
+                url:'/Grade/GetListByExamId',
                 clickToSelect: true,
                 uniqueId: "Id",
                 columns: [{
-                    field: 'MENU_NAME',
+                    field: 'StudentId',
                     title: '学号'
                 }, {
-                    field: 'MENU_URL',
+                    field: 'Name',
                     title: '学生姓名'
                 }, {
-                    field: 'PARENT_ID',
+                    field: 'Score',
                     title: '成绩'
                 },]
             });

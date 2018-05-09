@@ -49,5 +49,11 @@ namespace OjExam.UIPortal.Controllers
                 return Json(Data, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult GetListByExamId(int id)
+        {
+            var Data = GradeService.GetEntities(u => u.ExamId == id).Select(u => new { u.StudentId, u.Student.Name, u.Score }).ToList();
+            return Json(Data, JsonRequestBehavior.AllowGet);
+        }
     }
 }
