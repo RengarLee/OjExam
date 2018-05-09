@@ -1,0 +1,89 @@
+﻿
+@using OjExam.Model
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap-table/css")
+    @Styles.Render("~/Content/Layui/css")
+    <style>
+        .layui-center {
+            text-align: center;
+            width: auto
+        }
+
+        .layui-form-item .layui-form-label {
+            width: 120px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="form1" class="layui-form">
+        <div>
+            <input type="hidden" name="id" value="@ViewBag.GradeId" />
+            @{ List<Problem> list = ViewBag.Problems;}
+
+        </div>
+
+        @{
+        foreach (var data in list)
+        {
+        <div class="layui-form-item">
+            <img src="@data.Src" style="width:200px;height:auto"/>
+            <div class="layui-input-block">
+                <input type="radio" name="@data.Id" value="A" title="A">
+                <input type="radio" name="@data.Id" value="B" title="B">
+                <input type="radio" name="@data.Id" value="C" title="C">
+                <input type="radio" name="@data.Id" value="D" title="D">
+            </div>
+        </div>
+        }
+
+        }
+        <div>
+            <input type="button" value="提交" id="btnSubmit"/>
+        </div>
+    </form>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/datapattern.js"></script>
+    @Scripts.Render("~/Content/Layui/js")
+    @Scripts.Render("~/Content/bootstrap-table/js")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    <script type="text/javascript">
+        layui.use('layer', function () {
+            var layer = layui.layer;
+        });
+        layui.use('form', function () {
+            var form = layui.form; 
+            form.render();
+        });  
+        $(function () {
+        });
+
+        $("#btnSubmit").click(function () {
+            $.post("/Problem/Submit", $("#form1").serialize(), function (data) {
+                if (data == "success") {
+                    initTable();
+                    layer.closeAll();
+                } else {
+                    layer.msg("操作失败请稍后再试");
+                }
+            })
+        });
+
+    </script>
+</body>
+
+</html>

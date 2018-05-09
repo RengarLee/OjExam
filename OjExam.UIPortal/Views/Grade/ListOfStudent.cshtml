@@ -117,25 +117,29 @@
                     },
                 ],
                 onDblClickRow: function (row, $element) {
-                    if (row["StartTime"] > Date.now) {
+                    var myDate = new Date().getTime();
+                    var start = row["StartTime"].replace(/\/Date\((\d+)\)\//gi, "$1");
+                    var end = row["EndTime"].replace(/\/Date\((\d+)\)\//gi, "$1");
+                    if (start > myDate) {
                         layer.msg("考试未开始");
-                    } else if (row["EndTime"] < Date.now) {
+                    } else if (end < myDate) {
                         layer.msg("考试已结束");
                     } else {
                         if (row["Score"] != null) {
                             layer.msg("已参加过考试");
                         } else {
+                            var index = layer.open({
+                                title:'试题',
+                                type: 2,
+                                content: '/Problem/ProblemList/' + row["Id"],
+                                maxmin: true,
+                                end: function () {
 
-
+                                }
+                            });
+                            layer.full(index);
                         }
                     }
-                    //layer.open({
-                    //    type: 1,
-                    //    content: $('#addDiv'),
-                    //    title: '考试时间',
-                    //    area: ['1000px', '500px']
-                    //});
-                    //$("#ExamId").val(row["Id"]);
                 },
             });
         };

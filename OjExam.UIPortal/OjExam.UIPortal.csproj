@@ -351,6 +351,8 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Exam\Query.cshtml" />
     <Content Include="Views\Grade\ListOfStudent.cshtml" />
+    <Content Include="Views\Problem\Test.cshtml" />
+    <Content Include="Views\Problem\ProblemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
