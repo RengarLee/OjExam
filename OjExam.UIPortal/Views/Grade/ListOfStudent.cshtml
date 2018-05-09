@@ -50,7 +50,7 @@
             $("#tb_class").bootstrapTable('destroy');
             $('#tb_class').bootstrapTable({
                 contentType: "application/x-www-form-urlencoded",
-                url: '/Exam/GetList',
+                url: '/Grade/GetList',
                 method: 'post',
                 striped: true,
                 cache: false,
@@ -134,7 +134,7 @@
                                 content: '/Problem/ProblemList/' + row["Id"],
                                 maxmin: true,
                                 end: function () {
-
+                                    initTable();
                                 }
                             });
                             layer.full(index);

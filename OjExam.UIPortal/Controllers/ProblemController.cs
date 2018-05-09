@@ -32,7 +32,7 @@ namespace OjExam.UIPortal.Controllers
             int offset = int.Parse(Request["offset"] ?? "0");
             int pageSize = int.Parse(Request["limit"] ?? "20");
             int pageIndex = (offset / pageSize) + 1;
-            var Data = ProblemService.GetPageEntities(pageIndex, pageSize, out int total, u => u.DelFlag == delNormal, u => u.Id, true).Select(u => new { u.Id, u.Answer,KonwPointName = u.KnowPoint.Name }).ToList();
+            var Data = ProblemService.GetPageEntities(pageIndex, pageSize, out int total, u =>true, u => u.Id, true).Select(u => new { u.Id, u.Answer,KonwPointName = u.KnowPoint.Name }).ToList();
             return Json(new { total = total, rows = Data }, JsonRequestBehavior.AllowGet);
         }
 
@@ -94,6 +94,8 @@ namespace OjExam.UIPortal.Controllers
             else
             {
                 problemlist = ProblemService.GetEntities(u => grade.Problems.Contains("," + u.Id + ",")).ToList();
+                List<String> Answers = grade.Answers.Substring(1).Split(',').ToList();
+                ViewBag.Answers = Answers;
             }
             ViewData["Problems"] = problemlist;
             return View();
@@ -122,7 +124,30 @@ namespace OjExam.UIPortal.Controllers
             grade.Score = (num * 25).ToString();
             sb.Append(",");
             grade.Answers = sb.ToString();
+            grade.DelFlag = delNormal;
+            GradeService.Updata(grade);
             return Content("success");
         }
+
+        public ActionResult Save()
+        {
+            int id = Convert.ToInt32(Request["id"]);
+            Grade grade = GradeService.GetEntities(u => u.Id == id).FirstOrDefault();
+            StringBuilder sb = new StringBuilder();
+            String Problems = grade.Problems;
+            List<String> proIds = Problems.Split(',').ToList();
+            foreach (var proid in proIds)
+            {
+                if (proid != "")
+                {
+                    sb.Append("," + Request[proid]);
+                }
+            }
+            grade.Answers = sb.ToString();
+            grade.DelFlag = delBeing;
+            GradeService.Updata(grade);
+            return Content("success");
+        }
+
     }
 }

@@ -36,22 +36,51 @@
         </div>
 
         @{
-        foreach (var data in list)
-        {
-        <div class="layui-form-item">
-            <img src="@data.Src" style="width:200px;height:auto"/>
-            <div class="layui-input-block">
-                <input type="radio" name="@data.Id" value="A" title="A">
-                <input type="radio" name="@data.Id" value="B" title="B">
-                <input type="radio" name="@data.Id" value="C" title="C">
-                <input type="radio" name="@data.Id" value="D" title="D">
-            </div>
-        </div>
-        }
+            if (ViewBag.Answers != null)
+            {
+                List<string> answers = ViewBag.Answers;
+                for (int i = 0; i < list.Count(); i++)
+                {
+                    <div class="layui-form-item">
+                        <img src="@list[i].Src" style="width:200px;height:auto" />
+                        <div class="layui-input-block">
+                            @for (char value = 'A'; value <= 'D'; value++)
+                            {
+                                if (answers[i].Contains(value))
+                                {
+                                    <input type="radio" name="@list[i].Id" value="@value" title="@value" checked="checked">
+                                }
+                                else
+                                {
+                                    <input type="radio" name="@list[i].Id" value="@value" title="@value">
+                                }
+
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                for (int i = 0; i < list.Count(); i++)
+                {
+                    <div class="layui-form-item">
+                        <img src="@list[i].Src" style="width:200px;height:auto" />
+                        <div class="layui-input-block">
+
+                            <input type="radio" name="@list[i].Id" value="A" title="A">
+                            <input type="radio" name="@list[i].Id" value="B" title="B">
+                            <input type="radio" name="@list[i].Id" value="C" title="C">
+                            <input type="radio" name="@list[i].Id" value="D" title="D">
+                        </div>
+                    </div>
+                }
+            }
+
 
         }
         <div>
-            <input type="button" value="提交" id="btnSubmit"/>
+            <input type="button" value="提交" id="btnSubmit" />
         </div>
     </form>
 
@@ -60,29 +89,36 @@
     @Scripts.Render("~/Content/Layui/js")
     @Scripts.Render("~/Content/bootstrap-table/js")
     @Scripts.Render("~/bundles/bootstrap")
-    
+
     <script type="text/javascript">
         layui.use('layer', function () {
             var layer = layui.layer;
         });
         layui.use('form', function () {
-            var form = layui.form; 
+            var form = layui.form;
             form.render();
-        });  
+        });
         $(function () {
         });
 
         $("#btnSubmit").click(function () {
             $.post("/Problem/Submit", $("#form1").serialize(), function (data) {
                 if (data == "success") {
-                    initTable();
-                    layer.closeAll();
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+
                 } else {
                     layer.msg("操作失败请稍后再试");
                 }
-            })
+            });
         });
 
+        function Save() {
+            $.post("/Problem/Save", $("#form1").serialize(), function (data) {
+            });
+        }
+
+        setInterval("Save()", 5000);
     </script>
 </body>
 
