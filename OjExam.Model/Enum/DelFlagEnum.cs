@@ -9,6 +9,8 @@ namespace OjExam.Model.Enum
     public enum DelFlagEnum
     {
         Normal = 0,
-        Delete = 1
+        Delete = 1,
+        NotStart = 2,
+        Being = 3,
     }
 }

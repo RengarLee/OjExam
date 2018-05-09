@@ -14,8 +14,10 @@ namespace OjExam.UIPortal.Controllers
 
         short delNormal = (short)Model.Enum.DelFlagEnum.Normal;
         short delDelete = (short)Model.Enum.DelFlagEnum.Delete;
+        short delNotStart = (short)Model.Enum.DelFlagEnum.NotStart;
         private IExamService ExamService = new ExamService();
-
+        private IStudentService StudentService = new StudentService();
+        private IGradeService GradeService = new GradeService();
         // GET: Exam
         public ActionResult Index()
         {
@@ -59,6 +61,20 @@ namespace OjExam.UIPortal.Controllers
             exam.DelFlag = delNormal;
             if (ExamService.Updata(exam))
             {
+                var StudentList = StudentService.GetEntities(u => u.ClassId == exam.ClassTeacherCourser.ClassId).ToList();
+                foreach (var student in StudentList)
+                {
+                    if (GradeService.GetEntities(u => u.StudentId == student.Id && exam.Id == u.ExamId).FirstOrDefault() == null)
+                    {
+                        Grade grade = new Grade()
+                        {
+                            ExamId = exam.Id,
+                            StudentId = student.Id,
+                            DelFlag = delNotStart
+                        };
+                        GradeService.Add(grade);
+                    }
+                }
                 return Content("success");
             }
             else

@@ -31,33 +31,6 @@
         <table id="tb_class"></table>
     </div>
 
-    <div id="addDiv">
-        <br />
-        <form id="form1" class="layui-form">
-            <input type="hidden" id="ExamId" name="Id" value="" />
-            <div class="layui-form-item layui-center">
-                <div class="layui-inline">
-                    <label class="layui-form-label">考试开始时间</label>
-                    <div class="layui-input-inline">
-                        <input name="StartTime" type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd HH:mm:ss">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">考试结束时间</label>
-                    <div class="layui-input-inline">
-                        <input name="EndTime" type="text" class="layui-input" id="test2" placeholder="yyyy-MM-dd HH:mm:ss">
-                    </div>
-                </div>
-            </div>
-            <br />
-            <br />
-            <div class="layui-center">
-                <button type="button" id="btnSubmit" class="layui-btn">确认</button>
-                <button type="button" id="btnCancel" class="layui-btn">取消</button>
-            </div>
-        </form>
-        <br />
-    </div>
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/datapattern.js"></script>
     @Scripts.Render("~/Content/Layui/js")
@@ -68,26 +41,8 @@
         layui.use('layer', function () {
             var layer = layui.layer;
         });
-        layui.use('form', function () {
-            var form = layui.form;
-            form.render();
-        });
-        layui.use('laydate', function () {
-            var laydate = layui.laydate;
-            //日期时间选择器
-            laydate.render({
-                elem: '#test1'
-                , type: 'datetime'
-            });
-
-            laydate.render({
-                elem: '#test2'
-                , type: 'datetime'
-            });
-        });
 
         $(function () {
-            $("#addDiv").css("display", "none");
             initTable();
         });
 
@@ -103,7 +58,6 @@
                 queryParams: queryParam,
                 minimumCountColumns: 2,
                 clickToSelect: true,
-                detailView: true,
                 uniqueId: "Id",
                 columns: [
                     {
@@ -128,16 +82,19 @@
                         align: 'center',
                     },
                     {
+                        field: 'TeacherName',
+                        title: '授课教师名称',
+                        visible: true,
+                        width: '20%',
+                        align: 'center',
+                    },
+                    {
                         field: 'StartTime',
                         title: '开始时间',
                         visible: true,
                         width: '20%',
-
                         align: 'center',
                         formatter: function (value, row, index) {
-                            if (value == null) {
-                                return null;
-                            }
                             return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d h:m");
                         }
                     },
@@ -148,49 +105,40 @@
                         width: '20%',
                         align: 'center',
                         formatter: function (value, row, index) {
-                            if (value == null) {
-                                return null;
-                            }
                             return (eval(value.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))).pattern("yyyy-M-d h:m");
                         }
                     },
+                    {
+                        field: 'Score',
+                        title: '分数',
+                        visible: true,
+                        width: '20%',
+                        align: 'center',
+                    },
                 ],
                 onDblClickRow: function (row, $element) {
-                    layer.open({
-                        type: 1,
-                        content: $('#addDiv'),
-                        title: '考试时间',
-                        area: ['1000px', '500px']
-                    });
-                    $("#ExamId").val(row["Id"]);
+                    if (row["StartTime"] > Date.now) {
+                        layer.msg("考试未开始");
+                    } else if (row["EndTime"] < Date.now) {
+                        layer.msg("考试已结束");
+                    } else {
+                        if (row["Score"] != null) {
+                            layer.msg("已参加过考试");
+                        } else {
+
+
+                        }
+                    }
+                    //layer.open({
+                    //    type: 1,
+                    //    content: $('#addDiv'),
+                    //    title: '考试时间',
+                    //    area: ['1000px', '500px']
+                    //});
+                    //$("#ExamId").val(row["Id"]);
                 },
-                onExpandRow: function (index, row, $detail) {
-                    initSubTable(index, row, $detail);
-                }
             });
         };
-        //子表
-        function initSubTable(index, row, $detail) {
-            var parentid = row.MENU_ID;
-            var cur_table = $detail.html('<table></table>').find('table');
-            $(cur_table).bootstrapTable({
-                method: 'get',
-                queryParams: { strParentID: parentid },
-                ajaxOptions: { strParentID: parentid },
-                clickToSelect: true,
-                uniqueId: "Id",
-                columns: [{
-                    field: 'MENU_NAME',
-                    title: '学号'
-                }, {
-                    field: 'MENU_URL',
-                    title: '学生姓名'
-                }, {
-                    field: 'PARENT_ID',
-                    title: '成绩'
-                },]
-            });
-        }
 
         $("#btnSubmit").click(function () {
             $.post("/Exam/Create", $("#form1").serialize(), function (data) {

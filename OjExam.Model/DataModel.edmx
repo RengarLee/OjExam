@@ -58,11 +58,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Score" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Score" Type="nvarchar(max)" />
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="ExamId" Type="int" Nullable="false" />
-          <Property Name="Problems" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Answers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Problems" Type="nvarchar(max)" />
+          <Property Name="Answers" Type="nvarchar(max)" />
           <Property Name="DelFlag" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="KnowPoint">
@@ -318,11 +318,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Score" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Score" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="StudentId" Type="Int32" Nullable="false" />
           <Property Name="ExamId" Type="Int32" Nullable="false" />
-          <Property Name="Problems" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Answers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Problems" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Student" Relationship="Self.FK_GradeStudent" FromRole="Grade" ToRole="Student" />
           <Property Name="DelFlag" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Exam" Relationship="OjExamModel.FK_GradeExam" FromRole="Grade" ToRole="Exam" />
